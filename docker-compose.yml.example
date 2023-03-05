@@ -1,0 +1,36 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: app-nginx
+    working_dir: /var/www
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./app/public:/var/www/public
+      - ./nginx/logs:/var/log/nginx/
+    networks:
+      - app
+
+  app:
+    build:
+     context: .
+     dockerfile: Dockerfile
+    container_name: app
+    working_dir: /var/www
+    user: "1000:1000"
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./app:/var/www
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
