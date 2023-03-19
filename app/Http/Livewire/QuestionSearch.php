@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Services\getTickets;
+use App\Services\coreTest;
 use Carbon\Carbon;
 
 class QuestionSearch extends Component
@@ -27,6 +28,9 @@ class QuestionSearch extends Component
 
         // Start timing load
         $loadTimeStart = microtime(true);
+
+        // Core load test API call
+        // $coreTestGetTickets = (new coreTest())->getTickets();
 
         // API call - get list of tickets that have questions
         $getTickets = ((new getTickets())->withQuestions());
@@ -189,17 +193,27 @@ class QuestionSearch extends Component
     public function updateCategoryFilter($category)
     {
         // $this->categoryFilter = $category;
-        if ($this->categoryFilter == $category) {
-            $this->categoryFilter = null;
+        if ($category == 'No category') {
+            $this->noCategoryFilter = !$this->noCategoryFilter;
         } else {
-            $this->categoryFilter = $category;
+            if ($this->categoryFilter == $category) {
+                $this->categoryFilter = null;
+            } else {
+                $this->categoryFilter = $category;
+            }
         }
+
+        // if ($this->categoryFilter == $category) {
+        //     $this->categoryFilter = null;
+        // } else {
+        //     $this->categoryFilter = $category;
+        // }
         // $this->render();
     }
 
     public function updateUserFilter($user)
     {
-        if ($user == 'Mystery Agent') {
+        if ($user == 'No user') {
             $this->missingUserFilter = !$this->missingUserFilter;
         } else {
             if ($this->userFilter == $user) {

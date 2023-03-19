@@ -70,22 +70,16 @@
 
                 <!-- Show Categories -->
                 <div wire:model="noCategoryFilter" wire:click="$toggle('noCategoryFilter')" class="{{ $noCategoryFilter ? 'checkbox-badges' : 'checkbox-badges-unchecked' }}">Categories
-<!--                     <input id="noCategory" name="noCategory" type="checkbox" value="not-empty" wire:model="noCategoryFilter" class="checkbox">
-                    <label for="noCategory"><i class="fa-regular fa-square-check"></i>Categories</label> -->
                 </div>            
 
                 <!-- Show Answers -->
                 <div wire:model="answerFilter" wire:click="$toggle('answerFilter')" class="{{ $answerFilter ? 'checkbox-badges' : 'checkbox-badges-unchecked' }}">
                     Answers
-<!--                     <input id="answer" name="answer" type="checkbox" value="not-empty" wire:model="answerFilter" class="checkbox">
-                    <label for="answer">Answers</label> -->
                 </div>
 
                 <!-- Show Users -->
                 <div wire:model="missingUserFilter" wire:click="$toggle('missingUserFilter')" class="{{ $missingUserFilter ? 'checkbox-badges' : 'checkbox-badges-unchecked' }}">
                     User
-<!--                     <input id="user" name="user" type="checkbox" value="not-empty" wire:model="missingUserFilter" class="checkbox">
-                    <label for="user"">User</label> -->
                 </div>                
             </div>
 
@@ -115,7 +109,7 @@
                                     <span wire:click="updateUserFilter('{{ $ticket->user }}')" class="date-user-badges">{{ $ticket->user }}</span>
                                 @else
                                     <!-- Display something if ticket has no user -->
-                                    <span wire:click="updateUserFilter('Mystery Agent')" class="date-user-badges">Mystery Agent</span>
+                                    <span wire:click="updateUserFilter('No user')" class="date-user-badges">No user</span>
                                 @endif
 
                             </div>
@@ -127,28 +121,44 @@
 
                         </div>
 
-                        <!-- Question & Answer section -->
+                        <!-- Question section -->
                         <div class="question">
-                            <!-- <div><span><b>Q</b>:</span></div> -->
+
+                            <!-- Show the question -->
                             <div><span>{{ $ticket->question }}</span></div>
                         </div>
+
+                        <!-- Answer section -->
                         <div class="answer">
-                            <!-- <div><span><b>A</b>:</span></div> -->
-                            <div><span>{!! $ticket->answer ? $ticket->answer : '<span class="no-answer">No answer yet :(</span>' !!}</span></div>
+                            <div>
+                                <span>
+                                    <!-- Show the answer if there is one, show "No answer yet :(" and make it togglable otherwise -->
+                                    {!! $ticket->answer ? $ticket->answer :
+                                        '<span wire:model="answerFilter"
+                                            wire:click="$toggle(\'answerFilter\')"
+                                            class="no-answer clickable">No answer yet :(
+                                        </span>'
+                                    !!}
+                                </span>
+                            </div>
                         </div>
 
                         <!-- Ticket card Footer -->
                         <div class="ticket-footer">
-           
-                            @foreach($ticket->category as $category)
-
-                            <!-- Category badges -->
-                            <div wire:click="updateCategoryFilter('{{ $category }}')" class="instance-category-badges">
-                                {{ $category }}
-                            </div>
-    
-                            @endforeach
-    
+                            <!-- Display categories if there are any -->
+                            @if($ticket->category)
+                                @foreach($ticket->category as $category)
+                                    <!-- Category badges -->
+                                    <div wire:click="updateCategoryFilter('{{ $category }}')" class="instance-category-badges">
+                                        {{ $category }}
+                                    </div>
+                                @endforeach
+                            @else
+                                <!-- Display something if ticket has no category -->
+                                <div wire:click="updateCategoryFilter('No category')" class="instance-category-badges">
+                                    No categories
+                                </div>
+                            @endif
                         </div>
 
                     </div>
