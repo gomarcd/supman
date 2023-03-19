@@ -1,0 +1,459 @@
+:root {
+    --background-color:#f0f0f0;
+    --text-color: #000000;
+    --question-text-color: #666666;
+    --answer-text-color: #5cb609;
+    --answer-text-weight: bold;
+    --link-color: #5a5a5d;
+    --link-hover-color: #4a90e2;
+    --label-color: #6C757D;
+    --input-border-color: #ccc;
+    --forms-background-color: #fff;
+    --forms-border-color: #C6C6C6;
+    --forms-border-focus-color: #4a90e2;
+    --forms-text-color: #4a90e2;
+    --forms-placeholder-text: #6C757D;
+    --forms-border-radius: 4px;
+    --dropdown-text-color: #4a90e2;
+    --badge-user-text: #4a90e2;
+    --badge-user-border: 1px solid;
+    --badge-user-border-color: #4a90e2;
+    --badge-user-border-radius: 4px;
+    --badge-user-background:ghostwhite;
+    --badge-category-text: ghostwhite;
+    --badge-category-text-size: 8px;
+    --badge-category-border: none;
+    --badge-category-border-color: ghostwhite;    
+    --badge-category-background: #4a90e2;
+    --badge-category-border-radius: 8px;
+    --flatpickr-calendar-background: #FFFFFF;
+    --ticket-card-border-color: #4a90e2;
+    --ticket-card-background: #fff;
+    --ticket-card-border-radius: 4px;
+    --ticket-card-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --scrollbar-thumb: #4a90e2;
+    font-size: 12px;
+    font-family: Lucida Console, monospace;
+    overflow-y: scroll;
+}
+
+/* Using Dracula palette: https://github.com/dracula/dracula-theme  */
+
+.dark-mode {
+  --background-color: #1c1e2b;
+  --text-color: #FFFFFF;
+  --answer-text-color: #50fa7b;
+  --answer-text-weight: normal;
+  --question-text-color: #f8f8f2;
+  --link-color: #f1fa8c;
+  --link-visited-color: #f1fa8c;
+  --link-hover-color: #f1fa8c;
+  --label-color: #6C757D;
+  --input-border-color: #ccc;
+  --forms-background-color: #44475a;
+  --forms-border-color: #282a36;
+  --forms-border-focus-color: #bd93f9;
+  --forms-border-radius: 2px;
+  --forms-text-color: #bd93f9;
+  --forms-placeholder-text: #838284;
+  --dropdown-text-color: #bd93f9;
+  --badge-user-text: #bd93f9;
+  --badge-user-border: none;
+  --badge-user-border-color: #282a36;
+  --badge-user-border-radius: 8px;
+  --badge-user-background: #44475a;
+  --badge-category-text: #ffb86c;
+  --badge-category-text-size: 10px;
+  --badge-category-border: none;
+  --badge-category-border-color: none;
+  --badge-category-background: #44475a;
+  --badge-category-border-radius: 8px;
+  --flatpickr-calendar-background: #000000;
+  --ticket-card-border-color: #bd93f9;
+  --ticket-card-background: #282a36;
+  --ticket-card-border-radius: 0px;
+  --ticket-card-box-shadow: none;
+  --scrollbar-thumb: #bd93f9;
+}
+
+html, body {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  /*min-width: 300px;
+  max-width: 600px;*/
+  margin: 8px;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+}
+
+.left-panel {
+  padding: 2px;
+  margin-right: 5px;
+  margin-left: -3px;
+  order: -1;
+  width: 100%;
+  max-width: 300px;
+  justify-content: left;
+  align-items: center;
+  align-self: flex-start;
+  height: 100%;
+}
+
+.center-panel {
+  flex: 1; /* take up remaining space */
+  flex-grow: 1;
+  flex-shrink: 0;  
+  padding: 2px;
+  min-width: 450px;
+}
+
+.right-panel {
+  padding: 2px;
+  margin-left: 5px;
+  margin-right: -3px;
+  order: 1;
+  width: 100%;
+  max-width: 300px;
+  justify-content: left;
+  align-items: flex-start;
+  align-self: flex-start;
+  height: 100%;
+}
+
+form {
+  max-width: 100%;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none; 
+}
+
+a:visited {
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-hover-color); 
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--link-hover-color);
+}
+
+/* Container for the filters */
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Container for the dropdowns */
+.dropdowns-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap:4px;
+}
+
+/* Container for the checkboxes */
+.checkboxes-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* Search input container to put darkmode toggle inside  */
+.search-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+/* Text input styles */
+.search-input {
+  color: var(--forms-text-color);
+  background-color: var(--forms-background-color);
+  font-size: 16px;
+  font-family: Lucida Console, monospace;  
+  max-width: 100%;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--forms-border-color);
+  border-radius: var(--forms-border-radius);
+  margin-bottom: 4px;    
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+    text-align: center;
+    color: var(--forms-placeholder-text);
+}
+
+.search-input:focus,
+.search-input:active,
+.dropdown:focus,
+.dropdown:active {
+  outline: none;
+  border-color: var(--forms-border-focus-color);
+}
+
+.search-input:not(:focus-visible),
+
+/* Checkbox styles */
+input[type="checkbox"] {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Checkbox label styles */
+label {
+  color: #6C757D;
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+
+/* Align form elements */
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* For checkboxes container */
+.checkbox {
+  align-items: center;
+}
+
+.checkbox:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Dropdown styles */
+.dropdown {
+  font-size: 12px;
+  font-family: Lucida Console, monospace;
+  color: var(--dropdown-text-color);
+  background-color: var(--forms-background-color);
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #fff;
+  border-radius: var(--forms-border-radius);
+  margin-bottom: 4px;
+}
+
+.dropdown:-moz-focusring {
+  border-color: #4a90e2;
+}
+
+.dropdown:not(:focus-visible) {
+  border-color: var(--forms-border-color);
+}
+
+.datepicker-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap:4px;
+}
+
+.datepicker-field {
+  position: relative;
+  width: 100%;
+}
+
+.datepicker-input {
+  outline: none;
+  font-size: 12px;
+  font-family: Lucida Console, monospace;
+  color: var(--dropdown-text-color);
+  background-color: var(--forms-background-color);
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--forms-border-color);
+  border-radius: var(--forms-border-radius);
+  margin-bottom: 4px;
+  box-sizing: border-box;
+}
+
+.datepicker-input:focus,
+.datepicker-input:active {
+  outline: none;
+  border-color: var(--forms-border-focus-color);
+}
+
+.datepicker-icon {
+  position: absolute;
+  right: 8px;
+  top: calc(50% - 1px);
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #6C757D;
+}
+.datepicker-icon:focus {
+  outline: none;
+}
+
+.datepicker-reset {
+  position: absolute;
+  right: 24px;
+  top: calc(50% - 0.3px);
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #6C757D;
+}
+
+.dark-mode-toggle {
+  position: absolute;
+  left: 4px;
+  top: 5.5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+}
+
+.dark-mode-toggle i {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.dark-mode-toggle.dark-mode i {
+  transform: rotate(180deg);
+}
+
+.question {
+  color: var(--question-text-color);
+  margin-bottom: 5px;
+}
+
+.answer {
+  color: var(--answer-text-color);
+  font-weight: var(--answer-text-weight);
+}
+
+/* wraps every ticket */
+.ticket-card {
+  border: 1px solid var(--ticket-card-border-color);
+  border-radius: var(--ticket-card-border-radius);
+  padding:6px;
+  margin-bottom: 7px;
+  background-color: var(--ticket-card-background);
+  box-shadow: var(--ticket-card-box-shadow);
+}
+
+/* wraps header to get id in the corner */
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* instance & category badges  */
+.instance-category-badges {
+  display: inline-block;
+  padding: 1px 6px;
+  margin-top: 8px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  font-size: var(--badge-category-text-size);
+  font-family: Lucida Console, monospace;
+  color: var(--badge-category-text);
+  border: var(--badge-category-border);
+  border-color: var(--badge-category-border-color);
+  background-color: var(--badge-category-background);
+  border-radius: var(--badge-category-border-radius);
+  vertical-align: middle;
+}
+
+/* date & user badges  */
+.date-user-badges {
+  display: inline-block;
+  padding: 1px 6px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  font-size: 10px;
+  font-family: Lucida Console, monospace;
+  color: var(--badge-user-text);
+  border: var(--badge-user-border);
+  border-color: var(--badge-user-border-color);
+  background-color: var(--badge-user-background);
+  border-radius: var(--badge-user-border-radius);
+  vertical-align: middle;
+}
+
+.ticket-details {
+    display: block;
+}
+
+.ticket-id {
+    font-weight: bold;
+    margin-bottom: auto;
+    margin-left: auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+}
+
+/*.badge-user {
+  display: inline-block;
+  padding: 1px 6px;
+  margin-right: -3px;
+  margin-bottom: 2px;
+  font-size: 10px;
+  font-family: Lucida Console, monospace;
+  color: var(--badge-user-text);
+  border: 1px solid;
+  border-color: var(--badge-user-border);
+  background-color: var(--badge-user-background);
+  border-radius: var(--badge-user-border-radius);
+  vertical-align: middle;
+}*/
+
+/*
+.badge-category {
+  display: inline-block;
+  padding: 1px 6px;
+  margin-bottom: 1px;
+  font-size: 8px;
+  font-family: Lucida Console, monospace;
+  color: var(--badge-category-text);
+  background-color: var(--badge-category-background);
+  border-radius: 8px;
+  vertical-align: middle;
+}*/
