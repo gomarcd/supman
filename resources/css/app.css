@@ -439,6 +439,14 @@ input[type="checkbox"] {
   margin-bottom: 10px;
 }
 
+/* wraps footer for the category badges */
+.ticket-footer {
+  width: 100%;
+  display: inline-flex;
+  justify-content: left;
+  gap: 6px;
+}
+
 /* instance & category badges  */
 .instance-category-badges {
   display: inline-block;
@@ -460,9 +468,9 @@ input[type="checkbox"] {
 .date-user-badges {
   display: inline-block;
   padding: 1px 6px;
-  margin-right: -3px;
+  margin-right: -4px;
   margin-bottom: 0px;
-  font-size: 10px;
+  font-size: 8px;
   font-family: Lucida Console, monospace;
   color: var(--badge-user-text);
   border: var(--badge-user-border);

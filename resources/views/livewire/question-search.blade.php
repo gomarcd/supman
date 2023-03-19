@@ -98,7 +98,7 @@
                 @foreach($filteredQuestions as $ticket)
                     <div class="ticket-card">
 
-                        <!-- Header -->
+                        <!-- Ticket card Header -->
                         <div class="ticket-header">
 
                             <!-- Date, instance & user badges -->
@@ -126,7 +126,7 @@
                             </div>
 
                         </div>
-                        
+
                         <!-- Question & Answer section -->
                         <div class="question">
                             <!-- <div><span><b>Q</b>:</span></div> -->
@@ -137,12 +137,20 @@
                             <div><span>{!! $ticket->answer ? $ticket->answer : '<span class="no-answer">No answer yet :(</span>' !!}</span></div>
                         </div>
 
-                        <!-- Category badges -->
-                        <div>
+                        <!-- Ticket card Footer -->
+                        <div class="ticket-footer">
+           
                             @foreach($ticket->category as $category)
-                                <span wire:click="updateCategoryFilter('{{ $category }}')" class="instance-category-badges">{{ $category }}</span>
+
+                            <!-- Category badges -->
+                            <div wire:click="updateCategoryFilter('{{ $category }}')" class="instance-category-badges">
+                                {{ $category }}
+                            </div>
+    
                             @endforeach
-                        </div>                        
+    
+                        </div>
+
                     </div>
                 @endforeach
             </div>
