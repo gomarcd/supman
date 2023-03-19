@@ -1,6 +1,7 @@
 :root {
     --background-color:#f0f0f0;
     --text-color: #000000;
+    --question-text-size: 12px;
     --question-text-color: #666666;
     --answer-text-color: #5cb609;
     --answer-text-weight: bold;
@@ -13,12 +14,12 @@
     --forms-border-focus-color: #4a90e2;
     --forms-text-color: #4a90e2;
     --forms-placeholder-text: #6C757D;
-    --forms-border-radius: 4px;
+    --forms-border-radius: 8px;
     --dropdown-text-color: #4a90e2;
     --badge-user-text: #4a90e2;
     --badge-user-border: 1px solid;
     --badge-user-border-color: #4a90e2;
-    --badge-user-border-radius: 4px;
+    --badge-user-border-radius: 8px;
     --badge-user-background:ghostwhite;
     --badge-category-text: ghostwhite;
     --badge-category-text-size: 8px;
@@ -26,10 +27,21 @@
     --badge-category-border-color: ghostwhite;    
     --badge-category-background: #4a90e2;
     --badge-category-border-radius: 8px;
+    --badge-checkbox-text-size: 8px;
+    --badge-checkbox-selected-text-color: ghostwhite;
+    --badge-checkbox-selected-border: 1px solid;
+    --badge-checkbox-selected-border-radius: 8px;
+    --badge-checkbox-selected-border-color: #6C757D;
+    --badge-checkbox-selected-background-color: #6C757D;
+    --badge-checkbox-unselected-text-color: #6C757D;
+    --badge-checkbox-unselected-border: 1px solid;
+    --badge-checkbox-unselected-border-color: #6C757D;
+    --badge-checkbox-unselected-border-radius: 8px;
+    --badge-checkbox-unselected-background-color: ghostwhite;
     --flatpickr-calendar-background: #FFFFFF;
     --ticket-card-border-color: #4a90e2;
     --ticket-card-background: #fff;
-    --ticket-card-border-radius: 4px;
+    --ticket-card-border-radius: 8px;
     --ticket-card-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     --scrollbar-thumb: #4a90e2;
     font-size: 12px;
@@ -43,8 +55,9 @@
   --background-color: #1c1e2b;
   --text-color: #FFFFFF;
   --answer-text-color: #50fa7b;
-  --answer-text-weight: normal;
+  --answer-text-weight: bold;
   --question-text-color: #f8f8f2;
+  --question-text-size: 12px;
   --link-color: #f1fa8c;
   --link-visited-color: #f1fa8c;
   --link-hover-color: #f1fa8c;
@@ -53,25 +66,36 @@
   --forms-background-color: #44475a;
   --forms-border-color: #282a36;
   --forms-border-focus-color: #bd93f9;
-  --forms-border-radius: 2px;
+  --forms-border-radius: 8px;
   --forms-text-color: #bd93f9;
   --forms-placeholder-text: #838284;
   --dropdown-text-color: #bd93f9;
   --badge-user-text: #bd93f9;
-  --badge-user-border: none;
-  --badge-user-border-color: #282a36;
+  --badge-user-border: 1px solid;
+  --badge-user-border-color: #bd93f9;
   --badge-user-border-radius: 8px;
   --badge-user-background: #44475a;
   --badge-category-text: #ffb86c;
-  --badge-category-text-size: 10px;
+  --badge-category-text-size: 8px;
   --badge-category-border: none;
   --badge-category-border-color: none;
   --badge-category-background: #44475a;
   --badge-category-border-radius: 8px;
+  --badge-checkbox-text-size: 8px;
+  --badge-checkbox-selected-text-color: ghostwhite;
+  --badge-checkbox-selected-border: 1px solid;
+  --badge-checkbox-selected-border-radius: 8px;
+  --badge-checkbox-selected-border-color: #1c1e2b;
+  --badge-checkbox-selected-background-color: #6C757D;
+  --badge-checkbox-unselected-text-color: #6C757D;
+  --badge-checkbox-unselected-border: 1px solid;
+  --badge-checkbox-unselected-border-color: #6C757D;
+  --badge-checkbox-unselected-border-radius: 8px;
+  --badge-checkbox-unselected-background-color: #1c1e2b;  
   --flatpickr-calendar-background: #000000;
   --ticket-card-border-color: #bd93f9;
   --ticket-card-background: #282a36;
-  --ticket-card-border-radius: 0px;
+  --ticket-card-border-radius: 8px;
   --ticket-card-box-shadow: none;
   --scrollbar-thumb: #bd93f9;
 }
@@ -83,7 +107,6 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 0px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -173,10 +196,63 @@ a:active {
 /* Container for the checkboxes */
 .checkboxes-container {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+/*  align-items: center;*/
   width: 100%;
-  margin-bottom: 8px;
+  margin-top: 6px;
+  margin-bottom: 0px;
+  gap: 4px;
+}
+
+/* instance & category badges  */
+.checkbox-badges {
+  display: inline-flex;
+  padding: 1px 6px;
+  margin-top: 0px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  font-size: var(--badge-checkbox-text-size);
+  font-family: Lucida Console, monospace;
+  color: var(--badge-checkbox-selected-text-color);
+  border: var(--badge-checkbox-selected-border);
+  border-color: var(--badge-checkbox-selected-border-color);
+  background-color: var(--badge-checkbox-selected-background-color);
+  border-radius: var(--badge-checkbox-selected-border-radius);
+  vertical-align: middle;
+}
+
+.checkbox-badges-unchecked {
+  display: inline-flex;
+  padding: 1px 6px;
+  margin-top: 0px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  font-size: var(--badge-checkbox-text-size);
+  font-family: Lucida Console, monospace;
+  color: var(--badge-checkbox-unselected-text-color);
+  border: var(--badge-checkbox-unselected-border);
+  border-color: var(--badge-checkbox-unselected-border-color);
+  background-color: var(--badge-checkbox-unselected-background-color);
+  border-radius: var(--badge-checkbox-unselected-border-radius);
+  vertical-align: middle;  
+}
+
+.checkboxes-container-header {
+  color: var(--forms-placeholder-text);
+  font-size: 10px;
+  margin-top: -2px;
+  margin-bottom: 4px;
+}
+
+.checkboxes-options {
+  margin-top: -4px;
+  font-size: 10px;
+}
+
+.search-results {
+  margin-top: 25px;
 }
 
 /* Search input container to put darkmode toggle inside  */
@@ -198,10 +274,10 @@ a:active {
   text-align: center;
   outline: none;
   width: 100%;
-  padding: 4px 8px;
+  padding: 4px;
   border: 1px solid var(--forms-border-color);
   border-radius: var(--forms-border-radius);
-  margin-bottom: 4px;    
+  margin-bottom: 4px;
   box-sizing: border-box;
 }
 
@@ -220,35 +296,18 @@ a:active {
 
 .search-input:not(:focus-visible),
 
-/* Checkbox styles */
+/* Checkbox styles: affects search and dropdown too */
 input[type="checkbox"] {
-  margin-right: 8px;
+/*  margin-right: 8px;*/
   vertical-align: middle;
-}
-
-/* Checkbox label styles */
-label {
-  color: #6C757D;
-  vertical-align: middle;
-  margin-bottom: 4px;
 }
 
 /* Align form elements */
-.form-group {
+/*.form-group {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-/* For checkboxes container */
-.checkbox {
-  align-items: center;
-}
-
-.checkbox:focus {
-    outline: none;
-    box-shadow: none;
-}
+}*/
 
 /* Dropdown styles */
 .dropdown {
@@ -257,7 +316,7 @@ label {
   color: var(--dropdown-text-color);
   background-color: var(--forms-background-color);
   width: 100%;
-  padding: 4px 8px;
+  padding:4px 5px;
   border: 1px solid #fff;
   border-radius: var(--forms-border-radius);
   margin-bottom: 4px;
@@ -293,7 +352,7 @@ label {
   padding: 4px 8px;
   border: 1px solid var(--forms-border-color);
   border-radius: var(--forms-border-radius);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   box-sizing: border-box;
 }
 
@@ -331,6 +390,7 @@ label {
 }
 
 .dark-mode-toggle {
+  z-index: 1;
   position: absolute;
   left: 4px;
   top: 5.5px;
@@ -352,6 +412,7 @@ label {
 
 .question {
   color: var(--question-text-color);
+  font-size: var(--question-text-size);
   margin-bottom: 5px;
 }
 

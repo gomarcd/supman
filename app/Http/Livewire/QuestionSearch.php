@@ -12,6 +12,7 @@ class QuestionSearch extends Component
     public $categoryFilter;
     public $userFilter;
     public $missingUserFilter;
+    public $noCategoryFilter;
     public $answerFilter;
     public $filteredQuestions;
     public $dateFilter;
@@ -44,6 +45,7 @@ class QuestionSearch extends Component
         
         $this->answerFilter = true;
         $this->missingUserFilter = true;
+        $this->noCategoryFilter = true;
         // Workaround proposed by author of Livewire: https://github.com/livewire/livewire/issues/27
         // Makes sure Livewire component's methods and view get an object instead of array
         session()->put('tickets', $this->tickets);
@@ -128,6 +130,15 @@ class QuestionSearch extends Component
             if (!$missingUserFilter) {
                 $filtered = $filtered->filter(function ($item) use ($missingUserFilter) {
                     return empty($item->user);
+                });
+                $this->filteredQuestions = $filtered;
+            }
+
+            // Show questions with no category
+            $noCategoryFilter = $this->noCategoryFilter;
+            if (!$noCategoryFilter) {
+                $filtered = $filtered->filter(function ($item) use ($noCategoryFilter) {
+                    return empty($item->category);
                 });
                 $this->filteredQuestions = $filtered;
             }

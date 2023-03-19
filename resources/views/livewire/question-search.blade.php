@@ -58,76 +58,87 @@
                 </button>
             </div>
         </div>
-        <!-- Checkboxes -->
+        
+        <!-- Checkbox Container -->
         <div class="checkboxes-container">
-            <div>
-                <input id="answer" name="answer" type="checkbox" value="not-empty" wire:model="answerFilter" class="checkbox">
-                <label for="answer">Answers</label>
+
+            <!-- Checkbox header -->
+            <div class="checkboxes-container-header">Show with:</div>
+
+            <!-- Checkboxes -->
+            <div class="checkboxes-options">
+
+                <!-- Show Categories -->
+                <div wire:model="noCategoryFilter" wire:click="$toggle('noCategoryFilter')" class="{{ $noCategoryFilter ? 'checkbox-badges' : 'checkbox-badges-unchecked' }}">Categories
+<!--                     <input id="noCategory" name="noCategory" type="checkbox" value="not-empty" wire:model="noCategoryFilter" class="checkbox">
+                    <label for="noCategory"><i class="fa-regular fa-square-check"></i>Categories</label> -->
+                </div>            
+
+                <!-- Show Answers -->
+                <div wire:model="answerFilter" wire:click="$toggle('answerFilter')" class="{{ $answerFilter ? 'checkbox-badges' : 'checkbox-badges-unchecked' }}">
+                    Answers
+<!--                     <input id="answer" name="answer" type="checkbox" value="not-empty" wire:model="answerFilter" class="checkbox">
+                    <label for="answer">Answers</label> -->
+                </div>
+
+                <!-- Show Users -->
+                <div wire:model="missingUserFilter" wire:click="$toggle('missingUserFilter')" class="{{ $missingUserFilter ? 'checkbox-badges' : 'checkbox-badges-unchecked' }}">
+                    User
+<!--                     <input id="user" name="user" type="checkbox" value="not-empty" wire:model="missingUserFilter" class="checkbox">
+                    <label for="user"">User</label> -->
+                </div>                
             </div>
 
-            <div>
-                <input id="user" name="user" type="checkbox" value="not-empty" wire:model="missingUserFilter" class="checkbox">
-                <label for="user"">User</label>
-            </div>
         </div>
 
         <!-- Display search results  -->
         @if ($searchTerm != "")
-            <div>
+            <div class="search-results">
+                <!-- Display a card for each ticket -->
                 @foreach($filteredQuestions as $ticket)
                     <div class="ticket-card">
-                        @if($ticket->user)
-                            <div class="ticket-header">
-                                <div class="ticket-details">
-                                    <!-- Date badge-->
-                                    <span wire:click="updateDateFilter('{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}')" class="date-user-badges">{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}</span>
 
-                                    <!-- Ticket instance badge -->
-                                    <span wire:click="updateUserFilter('{{ $ticket->instance }}')" class="date-user-badges">{{ $ticket->instance }}</span>
-                                    
-                                    <!-- Ticket user badge -->
+                        <!-- Header -->
+                        <div class="ticket-header">
+
+                            <!-- Date, instance & user badges -->
+                            <div class="ticket-details">
+
+                                <!-- Date badge-->
+                                <span wire:click="updateDateFilter('{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}')" class="date-user-badges">{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}</span>
+
+                                <!-- Instance badge -->
+                                <span wire:click="updateInstanceFilter('{{ $ticket->instance }}')" class="date-user-badges">{{ $ticket->instance }}</span>
+
+                                <!-- User badge -->
+                                @if($ticket->user)
                                     <span wire:click="updateUserFilter('{{ $ticket->user }}')" class="date-user-badges">{{ $ticket->user }}</span>
+                                @else
+                                    <!-- Display something if ticket has no user -->
+                                    <span wire:click="updateUserFilter('Mystery Agent')" class="date-user-badges">Mystery Agent</span>
+                                @endif
 
-                                    <!-- Account ID -->
-                                    <!-- <a href="{{ $instance_url }}app#/accounts/show/{{ $ticket->account }}" target="_blank">{{ $ticket->account }}</a> -->
-                                </div>
-                                <div class="ticket-id">
-                                    <!-- Ticket ID -->
-                                    <a href="{{ $instance_url }}app#/tickets/show/{{ $ticket->id }}" target="_blank">{{ $ticket->id }}</a>
-                                </div>
                             </div>
-                        @else
-                            <!-- Date badge-->
-                            <span wire:click="updateDateFilter('{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}')" class="badge-user">{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}</span>
 
-                            <!-- Ticket user badge -->
-                            <span wire:click="updateUserFilter('Mystery Agent')" class="badge-user">Mystery Agent</span>
-                            
-                            <!-- Ticket ID -->
-                            <a href="{{ $instance_url }}app#/tickets/show/{{ $ticket->id }}" target="_blank">{{ $ticket->id }}</a>
-                            <br>
+                            <!-- Ticket id -->
+                            <div class="ticket-id">
+                                <a href="{{ $instance_url }}app#/tickets/show/{{ $ticket->id }}" target="_blank">{{ $ticket->id }}</a>
+                            </div>
 
-                            <!-- Instance badge -->
-                            <span class="badge-category">{{ $ticket->instance }}</span>
-
-                            <!-- Category badges -->
-                            @foreach($ticket->category as $category)
-                                <span wire:click="updateCategoryFilter('{{ $category }}')" class="badge-category">{{ $category }}</span>
-                            @endforeach                    
-                        @endif
-
-                        <!-- Stuff -->
+                        </div>
+                        
+                        <!-- Question & Answer section -->
                         <div class="question">
-                            <span><b>Q</b>: {{ $ticket->question }}</span>
+                            <!-- <div><span><b>Q</b>:</span></div> -->
+                            <div><span>{{ $ticket->question }}</span></div>
                         </div>
                         <div class="answer">
-                            <span><b>A</b>: {!! $ticket->answer ? $ticket->answer : '<span class="no-answer">No answer yet :(</span>' !!}</span>
+                            <!-- <div><span><b>A</b>:</span></div> -->
+                            <div><span>{!! $ticket->answer ? $ticket->answer : '<span class="no-answer">No answer yet :(</span>' !!}</span></div>
                         </div>
 
-                        <!-- Instance & Categories badges -->
+                        <!-- Category badges -->
                         <div>
-                            <!-- <span wire:click="updateInstanceFilter('{{ $ticket->instance }}')" class="instance-category-badges">{{ $ticket->instance }}</span> -->
-
                             @foreach($ticket->category as $category)
                                 <span wire:click="updateCategoryFilter('{{ $category }}')" class="instance-category-badges">{{ $category }}</span>
                             @endforeach
@@ -135,7 +146,7 @@
                     </div>
                 @endforeach
             </div>
-        @endif        
+        @endif
     </div>
 
     <!-- Right panel -->
