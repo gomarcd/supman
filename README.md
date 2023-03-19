@@ -8,6 +8,6 @@ Made with Laravel & Livewire:
 - Toggle & filter without page refresh
 - Dark mode toggle
 
-![screenshot](screenshot.png)
+![screenshot](screenshot1.png)
 
 ![screenshot](screenshot2.png)
