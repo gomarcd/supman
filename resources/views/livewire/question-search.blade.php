@@ -1,9 +1,11 @@
-<div class="container">
-
+<div wire:poll=refreshData class="container">
     <!-- Left panel -->
     <div class="left-panel">
-<!--         Load: {{ $loadTime }} sec
-        Payload: {{ $payloadSize }} KB -->
+<!--         Stats:<br><br>
+        Time: {{ now()->format('H:i:s') }}<br>
+        Pageload: {{ $loadTime }} sec<br>
+        Payload: {{ $payloadSize }} KB<br>
+        Refresh: {{ $timeRefresh }} -->
     </div>
 
     <!-- Center panel -->

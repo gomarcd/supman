@@ -38,7 +38,6 @@
     --badge-checkbox-unselected-border-color: #6C757D;
     --badge-checkbox-unselected-border-radius: 8px;
     --badge-checkbox-unselected-background-color: ghostwhite;
-    --flatpickr-calendar-background: #FFFFFF;
     --ticket-card-border-color: #4a90e2;
     --ticket-card-background: #fff;
     --ticket-card-border-radius: 8px;
@@ -92,7 +91,6 @@
   --badge-checkbox-unselected-border-color: #6C757D;
   --badge-checkbox-unselected-border-radius: 8px;
   --badge-checkbox-unselected-background-color: #1c1e2b;  
-  --flatpickr-calendar-background: #000000;
   --ticket-card-border-color: #bd93f9;
   --ticket-card-background: #282a36;
   --ticket-card-border-radius: 8px;
@@ -100,9 +98,10 @@
   --scrollbar-thumb: #bd93f9;
 }
 
+/* Using the important tag to overcome Dark Reader effects  */
 html, body {
   margin: 0;
-  background-color: var(--background-color);
+  background-color: var(--background-color) !important;
   color: var(--text-color);
   display: flex;
   align-items: center;
@@ -113,12 +112,10 @@ html, body {
 
 .container {
   width: 100%;
-  /*min-width: 300px;
-  max-width: 600px;*/
   margin: 8px;
   padding: 8px;
   display: flex;
-  justify-content: space-between;
+/*  justify-content: space-between;*/
   align-items: center;  
 }
 
@@ -499,30 +496,17 @@ input[type="checkbox"] {
   background-color: var(--scrollbar-thumb);
 }
 
-/*.badge-user {
-  display: inline-block;
-  padding: 1px 6px;
-  margin-right: -3px;
-  margin-bottom: 2px;
-  font-size: 10px;
-  font-family: Lucida Console, monospace;
-  color: var(--badge-user-text);
-  border: 1px solid;
-  border-color: var(--badge-user-border);
-  background-color: var(--badge-user-background);
-  border-radius: var(--badge-user-border-radius);
-  vertical-align: middle;
-}*/
+/* Preserve darkmode toggle icon against DarkReader shenanigans */
+#dark-mode-toggle i {
+  color: var(--text-color);
+}
 
-/*
-.badge-category {
-  display: inline-block;
-  padding: 1px 6px;
-  margin-bottom: 1px;
-  font-size: 8px;
-  font-family: Lucida Console, monospace;
-  color: var(--badge-category-text);
-  background-color: var(--badge-category-background);
-  border-radius: 8px;
-  vertical-align: middle;
-}*/
+@media screen and (inverted-colors: inverted) {
+  #dark-mode-toggle i {
+    color: black;
+  }
+}
+
+.flatpickr-input {
+   color: var(--forms-text-color) !important;
+}

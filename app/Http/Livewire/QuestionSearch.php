@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Services\getTickets;
 use App\Services\coreTest;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class QuestionSearch extends Component
 {
@@ -20,11 +21,14 @@ class QuestionSearch extends Component
     public $fromDate;
     public $toDate;
     public $instanceFilter;
+    public $timeRefresh;
 
     public function mount()
     {
         // Set instance URL
         $this->instance_url = env('INSTANCE_URL');
+
+        $timeRefresh=0;
 
         // Start timing load
         $loadTimeStart = microtime(true);
@@ -32,9 +36,15 @@ class QuestionSearch extends Component
         // Core load test API call
         // $coreTestGetTickets = (new coreTest())->getTickets();
 
-        // API call - get list of tickets that have questions
-        $getTickets = ((new getTickets())->withQuestions());
-        $this->tickets = ((new getTickets())->withQuestions())->tickets;
+        // Check cache first, call API if null
+        $getTickets = Cache::get('getTickets');
+
+        if($getTickets == null) {
+            $getTickets = ((new getTickets())->withQuestions());
+            Cache::put('getTickets', $getTickets, 5);
+        }
+
+        $this->tickets = $getTickets->tickets;
         $this->ticketCategories = ($getTickets->ticketCategories)->filter(function($category) {return $category !== null;})->values();
         $this->ticketUsers = ($getTickets->ticketUsers)->filter(function($user) {return $user !== null;})->values();
 
@@ -45,7 +55,7 @@ class QuestionSearch extends Component
         $loadTimeStop = microtime(true);
 
         // API call load time
-        $this->loadTime = round(($loadTimeStop - $loadTimeStart), 2);
+        $this->loadTime = round(($loadTimeStop - $loadTimeStart), 4);
         
         $this->answerFilter = true;
         $this->missingUserFilter = true;
@@ -64,7 +74,11 @@ class QuestionSearch extends Component
 
     public function render()
     {
-        $filteredQuestions = $this->getFilteredQuestions($this->tickets, $this->searchTerm);
+        // Get updated tickets from cache
+        $getTickets = Cache::get('getTickets');
+        $tickets = $getTickets->tickets;
+
+        $filteredQuestions = $this->getFilteredQuestions($tickets, $this->searchTerm);
 
         return view('livewire.question-search');
     }
@@ -181,7 +195,7 @@ class QuestionSearch extends Component
                     }
                 });
                 $this->filteredQuestions = $filtered;
-            }             
+            }
         }   
     }
 
@@ -202,13 +216,6 @@ class QuestionSearch extends Component
                 $this->categoryFilter = $category;
             }
         }
-
-        // if ($this->categoryFilter == $category) {
-        //     $this->categoryFilter = null;
-        // } else {
-        //     $this->categoryFilter = $category;
-        // }
-        // $this->render();
     }
 
     public function updateUserFilter($user)
@@ -257,5 +264,22 @@ class QuestionSearch extends Component
         // $this->render();
     }
 
+    public function refreshData()
+    {
+        // Start timing the refresh
+        $startTimeRefresh = microtime(true);
+
+        // Look for the cached data first
+        $getTickets = Cache::get('getTickets');
+
+        // if($getTickets == null) {
+        //     $getTickets = ((new getTickets())->withQuestions());
+        //     Cache::put('getTickets', $getTickets, 5);
+        // }
+        $this->tickets = $getTickets->tickets;
+
+        $stopTimeRefresh = microtime(true);
+        $this->timeRefresh = round(($stopTimeRefresh - $startTimeRefresh), 4);
+    }
 
 }
