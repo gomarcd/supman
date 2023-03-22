@@ -18,12 +18,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/auth/redirect', function () {
+// Redirect the user to Google login
+Route::get('/login/goog', function () {
     return Socialite::driver('google')->redirect();
 });
  
+// User redirected here from Google after auth with them
 Route::get('/auth/goog', function () {
     $user = Socialite::driver('google')->user();
+
+    // Check if user's email address is allowed to register
+    $allowedEmails = ['user1@example.com', 'user2@example.com'];
+    if (!in_array($user->email, $allowedEmails)) {
+        return redirect('/')->withErrors(['You are not allowed to register.']);
  
     // $user->token
 });
