@@ -6,11 +6,22 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 // Get the stored dark mode preference
 const storedDarkMode = localStorage.getItem("darkMode");
 
+// Different toggle icons for dark and light mode
+const sunIcon = document.querySelector("#dark-mode-toggle .fa-sun");
+const moonIcon = document.querySelector("#dark-mode-toggle .fa-moon");
+
 function setDarkMode(enabled) {
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const sunIcon = darkModeToggle.querySelector(".fa-sun");
+  const moonIcon = darkModeToggle.querySelector(".fa-moon");
   if (enabled) {
     document.documentElement.classList.add("dark-mode");
+    sunIcon.style.display = "inline-block";
+    moonIcon.style.display = "none";
   } else {
     document.documentElement.classList.remove("dark-mode");
+    sunIcon.style.display = "none";
+    moonIcon.style.display = "inline-block";    
   }
 }
 
@@ -34,3 +45,5 @@ document.getElementById("dark-mode-toggle").addEventListener("click", () => {
   // Save the preference to localStorage
   localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
 });
+
+

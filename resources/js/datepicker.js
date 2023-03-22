@@ -14,13 +14,13 @@ window.addEventListener('DOMContentLoaded', () => {
   // Event listeners to clear selection when reset icon is clicked
   fromDatePickerReset.addEventListener('click', () => {
     fromDateInput.value = ''; // Clear the input value
-    // fromDatePicker.clear(); // Clear the flatpickr selection
+    fromDatePicker.clear(); // Clear the flatpickr selection
     Livewire.emit('updateFromDate', null); // Reset fromDate on the server-side
   });
 
   toDatePickerReset.addEventListener('click', () => {
     toDateInput.value = ''; // Clear the input value
-    // toDatePicker.clear(); // Clear the flatpickr selection
+    toDatePicker.clear(); // Clear the flatpickr selection
     Livewire.emit('updateToDate', null); // Reset toDate on the server-side
   });
 

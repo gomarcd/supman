@@ -1,56 +1,62 @@
 :root {
+    --font-size: 12px;
+    --font-family: 'CamingoCode', monospace;
+    --border-radius: 8px;
     --background-color:#f0f0f0;
     --text-color: #000000;
     --question-text-size: 12px;
     --question-text-color: #666666;
+    --answer-text-size: 12px;
     --answer-text-color: #5cb609;
     --answer-text-weight: bold;
     --link-color: #5a5a5d;
     --link-hover-color: #4a90e2;
     --label-color: #6C757D;
+    --label-size: 10px;
     --input-border-color: #ccc;
     --forms-background-color: #fff;
     --forms-border-color: #C6C6C6;
     --forms-border-focus-color: #4a90e2;
     --forms-text-color: #4a90e2;
     --forms-placeholder-text: #6C757D;
-    --forms-border-radius: 8px;
+    --forms-border-radius: var(--border-radius);
     --dropdown-text-color: #4a90e2;
     --badge-user-text: #4a90e2;
     --badge-user-border: 1px solid;
     --badge-user-border-color: #4a90e2;
-    --badge-user-border-radius: 8px;
+    --badge-user-border-radius: var(--border-radius);
     --badge-user-background:ghostwhite;
     --badge-category-text: ghostwhite;
     --badge-category-text-size: 8px;
     --badge-category-border: none;
     --badge-category-border-color: ghostwhite;    
     --badge-category-background: #4a90e2;
-    --badge-category-border-radius: 8px;
+    --badge-category-border-radius: var(--border-radius);
     --badge-checkbox-text-size: 8px;
     --badge-checkbox-selected-text-color: ghostwhite;
     --badge-checkbox-selected-border: 1px solid;
-    --badge-checkbox-selected-border-radius: 8px;
+    --badge-checkbox-selected-border-radius: var(--border-radius);
     --badge-checkbox-selected-border-color: #6C757D;
     --badge-checkbox-selected-background-color: #6C757D;
     --badge-checkbox-unselected-text-color: #6C757D;
     --badge-checkbox-unselected-border: 1px solid;
     --badge-checkbox-unselected-border-color: #6C757D;
-    --badge-checkbox-unselected-border-radius: 8px;
+    --badge-checkbox-unselected-border-radius: var(--border-radius);
     --badge-checkbox-unselected-background-color: ghostwhite;
+    --ticket-header-user: #000;
     --ticket-card-border-color: #4a90e2;
     --ticket-card-background: #fff;
-    --ticket-card-border-radius: 8px;
+    --ticket-card-border-radius: var(--border-radius);
     --ticket-card-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     --scrollbar-thumb: #4a90e2;
-    font-size: 12px;
-    font-family: Lucida Console, monospace;
     overflow-y: scroll;
 }
 
 /* Using Dracula palette: https://github.com/dracula/dracula-theme  */
 
 .dark-mode {
+/*  --font-size: 12px;
+  --font-family: 'CamingoCode', monospace;*/
   --background-color: #1c1e2b;
   --text-color: #FFFFFF;
   --answer-text-color: #50fa7b;
@@ -61,41 +67,44 @@
   --link-visited-color: #f1fa8c;
   --link-hover-color: #f1fa8c;
   --label-color: #6C757D;
+  --label-size: 10px;
   --input-border-color: #ccc;
   --forms-background-color: #44475a;
   --forms-border-color: #282a36;
   --forms-border-focus-color: #bd93f9;
-  --forms-border-radius: 8px;
+  --forms-border-radius: var(--border-radius);
   --forms-text-color: #bd93f9;
   --forms-placeholder-text: #838284;
   --dropdown-text-color: #bd93f9;
   --badge-user-text: #bd93f9;
   --badge-user-border: 1px solid;
   --badge-user-border-color: #bd93f9;
-  --badge-user-border-radius: 8px;
+  --badge-user-border-radius: var(--border-radius);
   --badge-user-background: #44475a;
   --badge-category-text: #ffb86c;
   --badge-category-text-size: 8px;
   --badge-category-border: none;
   --badge-category-border-color: none;
   --badge-category-background: #44475a;
-  --badge-category-border-radius: 8px;
+  --badge-category-border-radius: var(--border-radius);
   --badge-checkbox-text-size: 8px;
   --badge-checkbox-selected-text-color: ghostwhite;
   --badge-checkbox-selected-border: 1px solid;
-  --badge-checkbox-selected-border-radius: 8px;
+  --badge-checkbox-selected-border-radius: var(--border-radius);
   --badge-checkbox-selected-border-color: #1c1e2b;
   --badge-checkbox-selected-background-color: #6C757D;
   --badge-checkbox-unselected-text-color: #6C757D;
   --badge-checkbox-unselected-border: 1px solid;
   --badge-checkbox-unselected-border-color: #6C757D;
-  --badge-checkbox-unselected-border-radius: 8px;
-  --badge-checkbox-unselected-background-color: #1c1e2b;  
+  --badge-checkbox-unselected-border-radius: var(--border-radius);
+  --badge-checkbox-unselected-background-color: #1c1e2b;
+  --ticket-header-user: #bd93f9;
   --ticket-card-border-color: #bd93f9;
   --ticket-card-background: #282a36;
-  --ticket-card-border-radius: 8px;
+  --ticket-card-border-radius: var(--border-radius);
   --ticket-card-box-shadow: none;
   --scrollbar-thumb: #bd93f9;
+  overflow-y: scroll;  
 }
 
 /* Using the important tag to overcome Dark Reader effects  */
@@ -108,6 +117,7 @@ html, body {
   justify-content: center;
   width: 100%;
   box-sizing: border-box;
+  font-family: var(--font-family);
 }
 
 .container {
@@ -115,16 +125,19 @@ html, body {
   margin: 8px;
   padding: 8px;
   display: flex;
-/*  justify-content: space-between;*/
-  align-items: center;  
+  align-items: flex-start;
 }
 
 .left-panel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 40px;
   padding: 2px;
   margin-right: 5px;
   margin-left: -3px;
   order: -1;
-  width: 100%;
+  width: 400px;
   max-width: 300px;
   justify-content: left;
   align-items: center;
@@ -133,14 +146,17 @@ html, body {
 }
 
 .center-panel {
-  flex: 1; /* take up remaining space */
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  flex-shrink: 0;  
   padding: 2px;
+  height: 100%;
+  width: 100%;
   min-width: 450px;
+  margin: 0px 40px 40px 320px;
 }
 
-.right-panel {
+/*.right-panel {
   padding: 2px;
   margin-left: 5px;
   margin-right: -3px;
@@ -151,10 +167,17 @@ html, body {
   align-items: flex-start;
   align-self: flex-start;
   height: 100%;
-}
+}*/
 
 form {
   max-width: 100%;
+}
+
+label {
+  color: var(--forms-placeholder-text);
+  font-size: var(--label-size);
+  margin-left: 2px;
+  margin-bottom: 1px;
 }
 
 a {
@@ -182,69 +205,78 @@ a:active {
   width: 100%;
 }
 
-/* Container for the dropdowns */
+/* Container to wrap category + user dropdowns */
 .dropdowns-container {
-  display: flex;
+  display: block;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   gap:4px;
 }
 
-/* Container for the checkboxes */
-.checkboxes-container {
+/* Category dropdown  */
+.category-dropdown {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-/*  align-items: center;*/
   width: 100%;
-  margin-top: 6px;
-  margin-bottom: 0px;
+}
+
+/* User dropdown  */
+.user-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Container for the checkboxes */
+.checkboxes-container {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 8px;
   gap: 4px;
 }
 
-/* instance & category badges  */
+/* formerly-checkbox badges  */
 .checkbox-badges {
   display: inline-flex;
-  padding: 1px 6px;
+  padding: 0px 4px 1px 4px;
   margin-top: 0px;
   margin-right: -3px;
   margin-bottom: 0px;
   font-size: var(--badge-checkbox-text-size);
-  font-family: Lucida Console, monospace;
+  font-family: var(--font-family);
   color: var(--badge-checkbox-selected-text-color);
   border: var(--badge-checkbox-selected-border);
   border-color: var(--badge-checkbox-selected-border-color);
   background-color: var(--badge-checkbox-selected-background-color);
   border-radius: var(--badge-checkbox-selected-border-radius);
-  vertical-align: middle;
 }
 
 .checkbox-badges-unchecked {
   display: inline-flex;
-  padding: 1px 6px;
+  padding: 0px 4px 1px 4px;
   margin-top: 0px;
   margin-right: -3px;
   margin-bottom: 0px;
   font-size: var(--badge-checkbox-text-size);
-  font-family: Lucida Console, monospace;
+  font-family: var(--font-family);
   color: var(--badge-checkbox-unselected-text-color);
   border: var(--badge-checkbox-unselected-border);
   border-color: var(--badge-checkbox-unselected-border-color);
   background-color: var(--badge-checkbox-unselected-background-color);
   border-radius: var(--badge-checkbox-unselected-border-radius);
-  vertical-align: middle;  
 }
 
 .checkboxes-container-header {
   color: var(--forms-placeholder-text);
+  align-self: center;
   font-size: 10px;
-  margin-top: -2px;
-  margin-bottom: 4px;
 }
 
+
 .checkboxes-options {
-  margin-top: -4px;
   font-size: 10px;
 }
 
@@ -254,11 +286,11 @@ a:active {
 
 /* Search input container to put darkmode toggle inside  */
 .search-input-container {
-  display: flex;
+  display: inline-block;
   align-items: center;
   width: 100%;
   position: relative;
-  display: inline-block;
+  margin-bottom: 5px;
 }
 
 /* Text input styles */
@@ -266,7 +298,7 @@ a:active {
   color: var(--forms-text-color);
   background-color: var(--forms-background-color);
   font-size: 16px;
-  font-family: Lucida Console, monospace;  
+  font-family: var(--font-family);  
   max-width: 100%;
   text-align: center;
   outline: none;
@@ -299,17 +331,11 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
-/* Align form elements */
-/*.form-group {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}*/
 
 /* Dropdown styles */
 .dropdown {
   font-size: 12px;
-  font-family: Lucida Console, monospace;
+  font-family: var(--font-family);
   color: var(--dropdown-text-color);
   background-color: var(--forms-background-color);
   width: 100%;
@@ -328,7 +354,7 @@ input[type="checkbox"] {
 }
 
 .datepicker-container {
-  display: flex;
+  display: block;
   justify-content: space-between;
   width: 100%;
   gap:4px;
@@ -342,7 +368,7 @@ input[type="checkbox"] {
 .datepicker-input {
   outline: none;
   font-size: 12px;
-  font-family: Lucida Console, monospace;
+  font-family: var(--font-family);
   color: var(--dropdown-text-color);
   background-color: var(--forms-background-color);
   width: 100%;
@@ -362,7 +388,7 @@ input[type="checkbox"] {
 .datepicker-icon {
   position: absolute;
   right: 8px;
-  top: calc(50% - 1px);
+  top: calc(50% + 9.5px);
   transform: translateY(-50%);
   background-color: transparent;
   border: none;
@@ -377,7 +403,7 @@ input[type="checkbox"] {
 .datepicker-reset {
   position: absolute;
   right: 24px;
-  top: calc(50% - 0.3px);
+  top: calc(50% + 10px);
   transform: translateY(-50%);
   background-color: transparent;
   border: none;
@@ -386,11 +412,14 @@ input[type="checkbox"] {
   color: #6C757D;
 }
 
+/* Dark Mode Toggle */
+
 .dark-mode-toggle {
   z-index: 1;
-  position: absolute;
-  left: 4px;
-  top: 5.5px;
+  position: fixed;
+  right: 9px;
+  top: 10px;
+  margin: 0px;
   background: none;
   border: none;
   cursor: pointer;
@@ -398,61 +427,93 @@ input[type="checkbox"] {
   padding: 0;
 }
 
+body:not(.dark-mode) .fa-sun {
+  display: none;
+}
+
 .dark-mode-toggle i {
   font-size: 1.5rem;
   transition: transform 0.3s ease;
 }
 
-.dark-mode-toggle.dark-mode i {
-  transform: rotate(180deg);
+.fa-sun, .fa-moon {
+  display: inline-block;
 }
+
+.dark-mode .fa-sun {
+  display: inline-block !important;
+}
+
+.dark-mode .fa-moon {
+  display: none;
+}
+
 
 .question {
   color: var(--question-text-color);
   font-size: var(--question-text-size);
+  font-family: var(--font-family);
+  font-style: italic;
   margin-bottom: 5px;
 }
 
 .answer {
   color: var(--answer-text-color);
+  font-size: var(--answer-text-size);
   font-weight: var(--answer-text-weight);
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 /* wraps every ticket */
 .ticket-card {
   border: 1px solid var(--ticket-card-border-color);
   border-radius: var(--ticket-card-border-radius);
-  padding:6px;
-  margin-bottom: 7px;
+  padding-top: 14px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 15px;
   background-color: var(--ticket-card-background);
   box-shadow: var(--ticket-card-box-shadow);
 }
 
 /* wraps header to get id in the corner */
 .ticket-header {
+  font-size: 12px;
+  color: var(--ticket-header-user);
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  padding-bottom: 20px;
+}
+
+.ticket-id {
+/*  font-size: 12px;*/
+  margin-left: auto;
+}
+
+.ticket-details {
+    display: block;
 }
 
 /* wraps footer for the category badges */
 .ticket-footer {
   width: 100%;
-  display: inline-flex;
-  justify-content: left;
+  display: flex;
+  justify-content: space-between;
   gap: 6px;
 }
 
-/* instance & category badges  */
-.instance-category-badges {
-  display: inline-block;
-  padding: 1px 6px;
+/* category badges in the ticket footer  */
+.ticket-footer-category-badge {
+  display: inline-flex;
+  padding: 0px 5px 1px 5px;
   margin-top: 8px;
+  margin-left: -1px;
   margin-right: -3px;
   margin-bottom: 0px;
   font-size: var(--badge-category-text-size);
-  font-family: Lucida Console, monospace;
+  font-family: var(--font-family);
   color: var(--badge-category-text);
   border: var(--badge-category-border);
   border-color: var(--badge-category-border-color);
@@ -461,30 +522,21 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
-/* date & user badges  */
-.date-user-badges {
+/* instance badge in the ticket footer  */
+.ticket-footer-instance-badge {
   display: inline-block;
-  padding: 1px 6px;
-  margin-right: -4px;
+  padding: 0px 5px 1px 5px;
+  margin-top: 8px;
+  margin-right: -1px;
   margin-bottom: 0px;
   font-size: 8px;
-  font-family: Lucida Console, monospace;
+  font-family: var(--font-family);
   color: var(--badge-user-text);
   border: var(--badge-user-border);
   border-color: var(--badge-user-border-color);
   background-color: var(--badge-user-background);
   border-radius: var(--badge-user-border-radius);
-  vertical-align: middle;
-}
-
-.ticket-details {
-    display: block;
-}
-
-.ticket-id {
-    font-weight: bold;
-    margin-bottom: auto;
-    margin-left: auto;
+  vertical-align: middle; 
 }
 
 ::-webkit-scrollbar {
@@ -495,6 +547,7 @@ input[type="checkbox"] {
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
 }
+
 
 /* Preserve darkmode toggle icon against DarkReader shenanigans */
 #dark-mode-toggle i {
@@ -509,4 +562,31 @@ input[type="checkbox"] {
 
 .flatpickr-input {
    color: var(--forms-text-color) !important;
+}
+
+/* Fonts  */
+
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('/resources/fonts/CamingoCode-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('/resources/fonts/CamingoCode-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('/resources/fonts/CamingoCode-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('/resources/fonts/CamingoCode-BoldItalic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: bold;
 }
