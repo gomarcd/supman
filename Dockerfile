@@ -17,7 +17,6 @@ COPY nginx/conf.d/app.conf /etc/nginx/conf.d/app.conf
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=node /var/www /var/www
-RUN rm -r /var/www/html
 
 RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 

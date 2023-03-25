@@ -4,10 +4,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: supman-docker
+    image: gomarcd/supman
     container_name: supman
     working_dir: /var/www
     restart: always
+    env_file:
+      - "./src/.env"
     ports:
       - "8282:80"
     networks:
