@@ -1,0 +1,594 @@
+:root {
+    --font-size: 12px;
+    --font-family: 'CamingoCode', monospace;
+    --border-radius: 8px;
+    --background-color:#f0f0f0;
+    --background-color-center-panel: #ffffff;
+    --text-color: #000000;
+    --question-text-size: 12px;
+    --question-text-color: #666666;
+    --answer-text-size: 12px;
+    --answer-text-color: #5cb609;
+    --answer-text-weight: bold;
+    --link-color: #5a5a5d;
+    --link-hover-color: #4a90e2;
+    --label-color: #6C757D;
+    --label-size: 10px;
+    --input-border-color: #ccc;
+    --forms-background-color: #fff;
+    --forms-border-color: #C6C6C6;
+    --forms-border-focus-color: #4a90e2;
+    --forms-text-color: #4a90e2;
+    --forms-placeholder-text: #6C757D;
+    --forms-border-radius: var(--border-radius);
+    --dropdown-text-color: #4a90e2;
+    --badge-user-text: #4a90e2;
+    --badge-user-border: 1px solid;
+    --badge-user-border-color: #4a90e2;
+    --badge-user-border-radius: var(--border-radius);
+    --badge-user-background:ghostwhite;
+    --badge-category-text: ghostwhite;
+    --badge-category-text-size: 8px;
+    --badge-category-border: none;
+    --badge-category-border-color: ghostwhite;    
+    --badge-category-background: #4a90e2;
+    --badge-category-border-radius: var(--border-radius);
+    --badge-checkbox-text-size: 8px;
+    --badge-checkbox-selected-text-color: ghostwhite;
+    --badge-checkbox-selected-border: 1px solid;
+    --badge-checkbox-selected-border-radius: var(--border-radius);
+    --badge-checkbox-selected-border-color: #6C757D;
+    --badge-checkbox-selected-background-color: #6C757D;
+    --badge-checkbox-unselected-text-color: #6C757D;
+    --badge-checkbox-unselected-border: 1px solid;
+    --badge-checkbox-unselected-border-color: #6C757D;
+    --badge-checkbox-unselected-border-radius: var(--border-radius);
+    --badge-checkbox-unselected-background-color: ghostwhite;
+    --ticket-header-user: #000;
+    --ticket-card-border-color: #4a90e2;
+    --ticket-card-background: #fff;
+    --ticket-card-border-radius: var(--border-radius);
+    --ticket-card-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --scrollbar-thumb: #4a90e2;
+    overflow-y: scroll;
+}
+
+/* Using Dracula palette: https://github.com/dracula/dracula-theme  */
+
+.dark-mode {
+/*  --font-size: 12px;
+  --font-family: 'CamingoCode', monospace;*/
+  --background-color: #1c1e2b;
+  --background-color-center-panel: #000000;
+  --text-color: #FFFFFF;
+  --answer-text-color: #50fa7b;
+  --answer-text-weight: bold;
+  --question-text-color: #f8f8f2;
+  --question-text-size: 12px;
+  --link-color: #f1fa8c;
+  --link-visited-color: #f1fa8c;
+  --link-hover-color: #f1fa8c;
+  --label-color: #6C757D;
+  --label-size: 10px;
+  --input-border-color: #ccc;
+  --forms-background-color: #44475a;
+  --forms-border-color: #282a36;
+  --forms-border-focus-color: #bd93f9;
+  --forms-border-radius: var(--border-radius);
+  --forms-text-color: #bd93f9;
+  --forms-placeholder-text: #838284;
+  --dropdown-text-color: #bd93f9;
+  --badge-user-text: #bd93f9;
+  --badge-user-border: 1px solid;
+  --badge-user-border-color: #bd93f9;
+  --badge-user-border-radius: var(--border-radius);
+  --badge-user-background: #44475a;
+  --badge-category-text: #ffb86c;
+  --badge-category-text-size: 8px;
+  --badge-category-border: none;
+  --badge-category-border-color: none;
+  --badge-category-background: #44475a;
+  --badge-category-border-radius: var(--border-radius);
+  --badge-checkbox-text-size: 8px;
+  --badge-checkbox-selected-text-color: ghostwhite;
+  --badge-checkbox-selected-border: 1px solid;
+  --badge-checkbox-selected-border-radius: var(--border-radius);
+  --badge-checkbox-selected-border-color: #1c1e2b;
+  --badge-checkbox-selected-background-color: #6C757D;
+  --badge-checkbox-unselected-text-color: #6C757D;
+  --badge-checkbox-unselected-border: 1px solid;
+  --badge-checkbox-unselected-border-color: #6C757D;
+  --badge-checkbox-unselected-border-radius: var(--border-radius);
+  --badge-checkbox-unselected-background-color: #1c1e2b;
+  --ticket-header-user: #bd93f9;
+  --ticket-card-border-color: #bd93f9;
+  --ticket-card-background: #282a36;
+  --ticket-card-border-radius: var(--border-radius);
+  --ticket-card-box-shadow: none;
+  --scrollbar-thumb: #bd93f9;
+  overflow-y: scroll;  
+}
+
+/* Using the important tag to overcome Dark Reader effects  */
+html, body {
+  margin: 0;
+  background-color: var(--background-color) !important;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.container {
+  width: 100%;
+  margin: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.left-panel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 40px;
+  padding: 2px;
+  margin-right: 5px;
+  margin-left: -3px;
+  order: -1;
+  width: 400px;
+  max-width: 300px;
+  justify-content: left;
+  align-items: center;
+  align-self: flex-start;
+  height: 100%;
+}
+
+.center-panel {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 2px;
+  height: 100%;
+  width: 100%;
+  min-width: 450px;
+  margin: 0px 40px 40px 320px;
+}
+
+/*.right-panel {
+  padding: 2px;
+  margin-left: 5px;
+  margin-right: -3px;
+  order: 1;
+  width: 100%;
+  max-width: 300px;
+  justify-content: left;
+  align-items: flex-start;
+  align-self: flex-start;
+  height: 100%;
+}*/
+
+form {
+  max-width: 100%;
+}
+
+label {
+  color: var(--forms-placeholder-text);
+  font-size: var(--label-size);
+  margin-left: 2px;
+  margin-bottom: 1px;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none; 
+}
+
+a:visited {
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-hover-color); 
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--link-hover-color);
+}
+
+/* Container for the filters */
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Container to wrap category + user dropdowns */
+.dropdowns-container {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap:4px;
+}
+
+/* Category dropdown  */
+.category-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* User dropdown  */
+.user-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Container for the checkboxes */
+.checkboxes-container {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  gap: 4px;
+}
+
+/* formerly-checkbox badges  */
+.checkbox-badges {
+  display: inline-flex;
+  padding: 0px 4px 1px 4px;
+  margin-top: 0px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  font-size: var(--badge-checkbox-text-size);
+  font-family: var(--font-family);
+  color: var(--badge-checkbox-selected-text-color);
+  border: var(--badge-checkbox-selected-border);
+  border-color: var(--badge-checkbox-selected-border-color);
+  background-color: var(--badge-checkbox-selected-background-color);
+  border-radius: var(--badge-checkbox-selected-border-radius);
+}
+
+.checkbox-badges-unchecked {
+  display: inline-flex;
+  padding: 0px 4px 1px 4px;
+  margin-top: 0px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  font-size: var(--badge-checkbox-text-size);
+  font-family: var(--font-family);
+  color: var(--badge-checkbox-unselected-text-color);
+  border: var(--badge-checkbox-unselected-border);
+  border-color: var(--badge-checkbox-unselected-border-color);
+  background-color: var(--badge-checkbox-unselected-background-color);
+  border-radius: var(--badge-checkbox-unselected-border-radius);
+}
+
+.checkboxes-container-header {
+  color: var(--forms-placeholder-text);
+  align-self: center;
+  font-size: 10px;
+}
+
+
+.checkboxes-options {
+  font-size: 10px;
+}
+
+.search-results {
+  margin-top: 25px;
+}
+
+/* Search input container to put darkmode toggle inside  */
+.search-input-container {
+  display: inline-block;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+/* Text input styles */
+.search-input {
+  color: var(--forms-text-color);
+  background-color: var(--forms-background-color);
+  font-size: 16px;
+  font-family: var(--font-family);  
+  max-width: 100%;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  padding: 4px;
+  border: 1px solid var(--forms-border-color);
+  border-radius: var(--forms-border-radius);
+  margin-bottom: 4px;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+    text-align: center;
+    color: var(--forms-placeholder-text);
+}
+
+.search-input:focus,
+.search-input:active,
+.dropdown:focus,
+.dropdown:active {
+  outline: none;
+  border-color: var(--forms-border-focus-color);
+}
+
+.search-input:not(:focus-visible),
+
+/* Checkbox styles: affects search and dropdown too */
+input[type="checkbox"] {
+/*  margin-right: 8px;*/
+  vertical-align: middle;
+}
+
+
+/* Dropdown styles */
+.dropdown {
+  font-size: 12px;
+  font-family: var(--font-family);
+  color: var(--dropdown-text-color);
+  background-color: var(--forms-background-color);
+  width: 100%;
+  padding:4px 5px;
+  border: 1px solid #fff;
+  border-radius: var(--forms-border-radius);
+  margin-bottom: 4px;
+}
+
+.dropdown:-moz-focusring {
+  border-color: #4a90e2;
+}
+
+.dropdown:not(:focus-visible) {
+  border-color: var(--forms-border-color);
+}
+
+.datepicker-container {
+  display: block;
+  justify-content: space-between;
+  width: 100%;
+  gap:4px;
+}
+
+.datepicker-field {
+  position: relative;
+  width: 100%;
+}
+
+.datepicker-input {
+  outline: none;
+  font-size: 12px;
+  font-family: var(--font-family);
+  color: var(--dropdown-text-color);
+  background-color: var(--forms-background-color);
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--forms-border-color);
+  border-radius: var(--forms-border-radius);
+  margin-bottom: 3px;
+  box-sizing: border-box;
+}
+
+.datepicker-input:focus,
+.datepicker-input:active {
+  outline: none;
+  border-color: var(--forms-border-focus-color);
+}
+
+.datepicker-icon {
+  position: absolute;
+  right: 8px;
+  top: calc(50% + 9.5px);
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #6C757D;
+}
+.datepicker-icon:focus {
+  outline: none;
+}
+
+.datepicker-reset {
+  position: absolute;
+  right: 24px;
+  top: calc(50% + 10px);
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #6C757D;
+}
+
+/* Dark Mode Toggle */
+
+.dark-mode-toggle {
+  z-index: 1;
+  position: fixed;
+  right: 9px;
+  top: 10px;
+  margin: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+}
+
+body:not(.dark-mode) .fa-sun {
+  display: none;
+}
+
+.dark-mode-toggle i {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.fa-sun, .fa-moon {
+  display: inline-block;
+}
+
+.dark-mode .fa-sun {
+  display: inline-block !important;
+}
+
+.dark-mode .fa-moon {
+  display: none;
+}
+
+
+.question {
+  color: var(--question-text-color);
+  font-size: var(--question-text-size);
+  font-family: var(--font-family);
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.answer {
+  color: var(--answer-text-color);
+  font-size: var(--answer-text-size);
+  font-weight: var(--answer-text-weight);
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* wraps every ticket */
+.ticket-card {
+  border: 1px solid var(--ticket-card-border-color);
+  border-radius: var(--ticket-card-border-radius);
+  padding-top: 14px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 15px;
+  background-color: var(--ticket-card-background);
+  box-shadow: var(--ticket-card-box-shadow);
+}
+
+/* wraps header to get id in the corner */
+.ticket-header {
+  font-size: 12px;
+  color: var(--ticket-header-user);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.ticket-id {
+/*  font-size: 12px;*/
+  margin-left: auto;
+}
+
+.ticket-details {
+    display: block;
+}
+
+/* wraps footer for the category badges */
+.ticket-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+/* category badges in the ticket footer  */
+.ticket-footer-category-badge {
+  display: inline-flex;
+  padding: 0px 5px 1px 5px;
+  margin-top: 8px;
+  margin-left: -1px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  font-size: var(--badge-category-text-size);
+  font-family: var(--font-family);
+  color: var(--badge-category-text);
+  border: var(--badge-category-border);
+  border-color: var(--badge-category-border-color);
+  background-color: var(--badge-category-background);
+  border-radius: var(--badge-category-border-radius);
+  vertical-align: middle;
+}
+
+/* instance badge in the ticket footer  */
+.ticket-footer-instance-badge {
+  display: inline-block;
+  padding: 0px 5px 1px 5px;
+  margin-top: 8px;
+  margin-right: -1px;
+  margin-bottom: 0px;
+  font-size: 8px;
+  font-family: var(--font-family);
+  color: var(--badge-user-text);
+  border: var(--badge-user-border);
+  border-color: var(--badge-user-border-color);
+  background-color: var(--badge-user-background);
+  border-radius: var(--badge-user-border-radius);
+  vertical-align: middle; 
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+}
+
+
+/* Preserve darkmode toggle icon against DarkReader shenanigans */
+#dark-mode-toggle i {
+  color: var(--text-color);
+}
+
+@media screen and (inverted-colors: inverted) {
+  #dark-mode-toggle i {
+    color: black;
+  }
+}
+
+.flatpickr-input {
+   color: var(--forms-text-color) !important;
+}
+
+/* Fonts  */
+
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('/resources/fonts/CamingoCode-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('/resources/fonts/CamingoCode-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('/resources/fonts/CamingoCode-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'CamingoCode';
+  src: url('/resources/fonts/CamingoCode-BoldItalic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: bold;
+}
