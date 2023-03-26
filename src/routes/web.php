@@ -28,7 +28,7 @@ Route::get('/auth/goog', function () {
     $user = Socialite::driver('google')->user();
 
     // Check if the user's email is authorized
-    $authorizedEmail = env('AUTH_EMAIL');
+    $authorizedEmail = [env('AUTH_EMAIL')];
 
     if (in_array($user->email, $authorizedEmail)) {
         dd('hi ' . $user->getName());        
