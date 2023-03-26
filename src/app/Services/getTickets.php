@@ -18,8 +18,8 @@ class getTickets
         }
         GRAPHQL;
 
-        $recordCount = Http::withToken(env('BEARER_TOKEN'))
-            ->post(env('SONAR_API'), [
+        $recordCount = Http::withToken(env('API_TOKEN'))
+            ->post(env('API_URL'), [
                 'query' => $findRecordCount
             ])['data']['tickets']['page_info']['total_count'];
 
@@ -72,7 +72,7 @@ class getTickets
         ];
 
         // Send query and store response
-        $response = Http::withToken(env('BEARER_TOKEN'))->post(env('SONAR_API'), compact('query', 'queryVariables'));
+        $response = Http::withToken(env('API_TOKEN'))->post(env('API_URL'), compact('query', 'queryVariables'));
 
         // Check immediate query response
         // dd($response->getBody()->getContents());

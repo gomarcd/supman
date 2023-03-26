@@ -1,0 +1,5 @@
+* * * * * /usr/local/bin/php /var/www/artisan schedule:run --no-ansi --no-interaction >> /var/log/cron.log 2>&1
+* * * * * echo "Hello from cron" >> /var/log/cron.log 2>&1
+* * * * * echo /usr/local/bin/php -v
+
+# can't be missing new line

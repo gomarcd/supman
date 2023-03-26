@@ -3,8 +3,11 @@
 /src/public/build
 /src/public/hot
 /src/public/storage
-/src/storage/*.key
+/src/database
+/src/storage
+/src/tests
 /src/vendor
+/src/cron.log
 /nginx/conf.d/logs
 /redis-data
 .env

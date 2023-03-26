@@ -10,6 +10,9 @@ services:
     restart: always
     env_file:
       - "./src/.env"
+    volumes:
+      - "./src/cron:/etc/cron.d/api_call"
+      - "./src/cron.log:/var/log/cron.log"
     ports:
       - "8282:80"
     networks:

@@ -19,7 +19,6 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $getTickets = ((new getTickets())->withQuestions());
             Cache::put('getTickets', $getTickets, now()->addMinutes(15));
-            Log::channel('schedule')->debug('Scheduled task ran successfully');
         })->everyMinute();
     }
 

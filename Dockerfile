@@ -18,11 +18,17 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=node /var/www /var/www
 
-RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
-
-RUN apt-get update && apt-get install -y redis-server
+RUN apt-get update && apt-get install -y redis-server cron supervisor
 RUN pecl install redis && docker-php-ext-enable redis
+
+ADD ./src/cron /etc/crontab
+RUN chmod 0644 /etc/crontab
+RUN crontab /etc/crontab
+
+COPY ./src/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 
 WORKDIR /var/www
 
-CMD ["sh", "-c", "redis-server & /usr/sbin/nginx & php-fpm"]
+CMD ["/usr/bin/supervisord", "--nodaemon", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
