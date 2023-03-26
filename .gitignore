@@ -8,6 +8,7 @@
 /src/tests
 /src/vendor
 /src/cron.log
+/src/supervisord.log
 /nginx/conf.d/logs
 /redis-data
 .env

@@ -19,13 +19,26 @@ Route::get('/', function () {
 });
 
 // Redirect the user to Google login
-Route::get('/login/goog', function () {
+Route::get('/auth/redirect', function () {
     return Socialite::driver('google')->redirect();
 });
  
 // User redirected here from Google after auth with them
-// Route::get('/auth/goog', function () {
-//     $user = Socialite::driver('google')->user();
+Route::get('/auth/goog', function () {
+    $user = Socialite::driver('google')->user();
+
+    // Check if the user's email is authorized
+    $authorizedEmail = env('AUTH_EMAIL');
+
+    if (in_array($user->email, $authorizedEmails)) {
+        // Email is authorized, show site
+        return view('welcome');
+    } else {
+        // Email is not authorized, show error message
+        return 'Unauthorized';
+    }
+
+});
 
 //     // Check if user's email address is allowed to register
 //     $allowedEmails = ['user1@example.com', 'user2@example.com'];
