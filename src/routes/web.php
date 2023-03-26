@@ -30,7 +30,7 @@ Route::get('/auth/goog', function () {
     // Check if the user's email is authorized
     $authorizedEmail = env('AUTH_EMAIL');
 
-    if (in_array($user->email, $authorizedEmails)) {
+    if (in_array($user->email, $authorizedEmail)) {
         dd('hi ' . $user->getName());        
         // Email is authorized, show site
         return view('welcome');
