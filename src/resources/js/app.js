@@ -2,6 +2,10 @@ import './bootstrap';
 import 'alpinejs';
 import './datepicker';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import.meta.glob([
+  '../images/**',
+  '../fonts/**',
+]);
 
 // Get the stored dark mode preference
 const storedDarkMode = localStorage.getItem("darkMode");

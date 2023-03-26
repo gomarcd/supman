@@ -8,16 +8,13 @@ services:
     container_name: supman
     working_dir: /var/www
     restart: always
-    env_file:
-      - "./src/.env"
     volumes:
-      - "./src/cron:/etc/cron.d/api_call"
       - "./src/cron.log:/var/log/cron.log"
+      - "./src/.env:/var/www/.env"
     ports:
       - "8282:80"
     networks:
       - supman
-
 networks:
   supman:
     driver: bridge
