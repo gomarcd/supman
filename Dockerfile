@@ -4,7 +4,8 @@ RUN mkdir -p storage/framework/{views,sessions,cache}
 WORKDIR /var/www
 RUN test -d storage/framework/views || mkdir -p storage/framework/views \
     && test -d storage/framework/sessions || mkdir -p storage/framework/sessions \
-    && test -d storage/framework/cache || mkdir -p storage/framework/cache
+    && test -d storage/framework/cache || mkdir -p storage/framework/cache \
+    && test -d storage/logs && touch storage/logs/laravel.log
 RUN composer install
 
 FROM node:latest AS node
