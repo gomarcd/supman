@@ -9,11 +9,9 @@ services:
     working_dir: /var/www
     restart: always
     volumes:
-      - "./src/cron.log:/var/log/cron.log"
-      - "./src/.env:/var/www/.env"
-      - "./src/supervisord.log:/var/log/supervisor/supervisord.log"
+      - "./.env:/var/www/.env"
     ports:
-      - "8282:80"
+      - "8080:80"
     networks:
       - supman
 networks:
