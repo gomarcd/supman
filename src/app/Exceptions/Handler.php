@@ -41,8 +41,20 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+
+        if ($this->app->environment('production')) {
+            $this->renderable(function (Throwable $e, $request) {
+                return response()->view('errors.500', [], 500);
+            });
+        } else {
+            $this->renderable(function (Throwable $e, $request) {
+                return parent::render($request, $e);
+            });
+        }
+
+        // Testing only displaying error in dev
+        // $this->reportable(function (Throwable $e) {
+        //     //
+        // });
     }
 }
