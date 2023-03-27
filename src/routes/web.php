@@ -17,7 +17,7 @@ use Firebase\JWT\JWT;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(VerifyToken::class);
 
 // Redirect the user to Google login
 Route::get('/auth/redirect', function () {
@@ -37,22 +37,17 @@ Route::get('/auth/goog', function () {
         $payload = array(
             "email" => $user->getEmail(),
         );
-        $token = JWT::encode($payload, $key, 'EdDSA');
 
-        dd($token);
+        $token = JWT::encode($payload, $key, 'HS256');
+
+        // Store the JWT token in a cookie
+        $cookie = cookie('jwt_token', $token, 525600);
+
         // Email is authorized, show site
-        return view('welcome');
+        return redirect('/')->withCookie($cookie);
     } else {
         // Email is not authorized, show error message
         return 'Unauthorized';
     }
 
 });
-
-//     // Check if user's email address is allowed to register
-//     $allowedEmails = ['user1@example.com', 'user2@example.com'];
-//     if (!in_array($user->email, $allowedEmails)) {
-//         return redirect('/')->withErrors(['You are not allowed to register.']);
- 
-//     // $user->token
-// });
