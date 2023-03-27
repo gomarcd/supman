@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Firebase\JWT\JWT;
+use App\Http\Middleware\VerifyToken;
 
 /*
 |--------------------------------------------------------------------------
