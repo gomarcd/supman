@@ -37,7 +37,7 @@ Route::get('/auth/goog', function () {
         $payload = array(
             "email" => $user->getEmail(),
         );
-        $token = JWT::encode($payload, $key);
+        $token = JWT::encode($payload, $key, 'EdDSA');
 
         dd($token);
         // Email is authorized, show site
