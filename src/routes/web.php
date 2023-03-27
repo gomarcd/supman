@@ -24,15 +24,15 @@ Route::get('/', function () {
 Route::get('/auth/redirect', function () {
     return Socialite::driver('google')->redirect();
 });
- 
+
 // User redirected here from Google after auth with them
 Route::get('/auth/goog', function () {
     $user = Socialite::driver('google')->user();
 
-    // Check if the user's email is authorized
-    $authorizedEmail = [env('AUTH_EMAIL')];
+    // Check if the user in whitelist
+    $authorizedEmail = explode(',', env('AUTH_EMAIL'));
 
-    // If so create JWT token
+    // Create JWT token for auth'd whitelisted user
     if (in_array($user->email, $authorizedEmail)) {
         $key = env('JWT_SECRET');
         $payload = array(
