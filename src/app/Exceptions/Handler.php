@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
 
-        if ($this->app->environment('production')) {
+        if (app()->environment('production')) {
             $this->renderable(function (Throwable $e, $request) {
                 return response()->view('errors.500', [], 500);
             });
