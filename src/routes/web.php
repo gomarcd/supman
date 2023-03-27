@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use Firebase\JWT\JWT;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,15 @@ Route::get('/auth/goog', function () {
     // Check if the user's email is authorized
     $authorizedEmail = [env('AUTH_EMAIL')];
 
+    // If so create JWT token
     if (in_array($user->email, $authorizedEmail)) {
-        dd('hi ' . $user->getName());        
+        $key = env('JWT_SECRET');
+        $payload = array(
+            "email" => $user->getEmail(),
+        );
+        $token = JWT::encode($payload, $key);
+
+        dd($token);
         // Email is authorized, show site
         return view('welcome');
     } else {
