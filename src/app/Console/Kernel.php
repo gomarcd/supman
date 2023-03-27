@@ -16,10 +16,15 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->call(function () {
-            $getTickets = ((new getTickets())->withQuestions());
-            Cache::put('getTickets', $getTickets, now()->addMinutes(15));
-        })->everyMinute();
+        Log::info('Starting apiCall command');
+        $schedule->command('app:api-call')->everyMinute();
+        Log::info('apiCall command complete');
+
+        // Temporarily commented out: testing this out as a 'command' instead
+        // $schedule->call(function () {
+        //     $getTickets = ((new getTickets())->withQuestions());
+        //     Cache::put('getTickets', $getTickets, now()->addMinutes(15));
+        // })->everyMinute();
     }
 
     /**

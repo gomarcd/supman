@@ -15,10 +15,15 @@
             </button>
 
             <!-- Search field -->
-            <form method="get">
-                <label>Search:</label>
-                <input type="text" placeholder="Find questions..." wire:model="searchTerm" class="search-input" />
-            </form>
+            <div>
+                <form method="get">
+                    <label>Search:</label>
+                    <input type="text" placeholder="Find questions..." wire:model="searchTerm" class="search-input" />
+                    <div wire:click="newApiCall" class="search-input-new-api-call">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Dropdowns -->

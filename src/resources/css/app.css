@@ -333,6 +333,18 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
+.search-input-new-api-call {
+  position: absolute;
+  right: 7px;
+  top: calc(50% + 8.5px);
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #6C757D;
+}
+
 
 /* Dropdown styles */
 .dropdown {

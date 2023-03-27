@@ -33,9 +33,6 @@ class QuestionSearch extends Component
         // Start timing load
         $loadTimeStart = microtime(true);
 
-        // Core load test API call
-        // $coreTestGetTickets = (new coreTest())->getTickets();
-
         // Check cache first, call API if null
         $getTickets = Cache::get('getTickets');
 
@@ -272,14 +269,28 @@ class QuestionSearch extends Component
         // Look for the cached data first
         $getTickets = Cache::get('getTickets');
 
-        // if($getTickets == null) {
-        //     $getTickets = ((new getTickets())->withQuestions());
-        //     Cache::put('getTickets', $getTickets, 5);
-        // }
+        // Check if the cache is empty or not
+        if (empty($getTickets)) {
+            try {
+                $getTickets = ((new getTickets())->withQuestions());
+                Cache::put('getTickets', $getTickets, now()->addMinutes(15));
+            } catch (\Throwable $th) {
+                // Log the error message
+                Log::error('Error fetching tickets data: ' . $th->getMessage());
+                return;
+            }
+        }
+
         $this->tickets = $getTickets->tickets;
 
         $stopTimeRefresh = microtime(true);
         $this->timeRefresh = round(($stopTimeRefresh - $startTimeRefresh), 4);
+    }
+
+    public function newApiCall() 
+    {
+        $getTickets = ((new getTickets())->withQuestions());
+        Cache::put('getTickets', $getTickets, 5);
     }
 
 }
