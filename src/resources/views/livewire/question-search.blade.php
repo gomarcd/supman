@@ -102,7 +102,6 @@
         </div>
 
         <div class="left-panel-testing-stats">
-            Time: {{ now()->format('H:i:s') }}<br>
             Pageload: {{ $loadTime }} sec<br>
             Payload: {{ $payloadSize }} KB<br>
             Refresh: {{ $timeRefresh }}
