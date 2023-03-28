@@ -7,6 +7,7 @@
     --background-color:#f0f0f0;
     --background-color-center-panel: #f0f0f0;
     --background-color-left-panel: #f0f0f0;
+    --border-color-left-panel: #C6C6C6;
     --text-color: #000000;
     --question-text-size: 1rem;
     --question-text-color: #666666;
@@ -66,6 +67,7 @@
   --background-color: #2c2f42;
   --background-color-center-panel: #2c2f42;
   --background-color-left-panel: #161824;
+  --border-color-left-panel: #bd93f9;
   --text-color: #FFFFFF;
   --answer-text-color: #50fa7b;
   --answer-text-weight: bold;
@@ -127,7 +129,7 @@ html, body {
 .left-panel {
   background-color: var(--background-color-left-panel);
   border-right: 1px solid;
-  border-right-color: var(--ticket-card-border-color);
+  border-right-color: var(--border-color-left-panel);
   position: fixed;
   padding-left: 24px;
   padding-right: 24px;
@@ -542,7 +544,7 @@ body:not(.dark-mode) .fa-sun {
   color: var(--text-color);
   border: 1px dotted red;
   padding: 20px;
-  background-color: var(--forms-background-color);
+  background-color: var(--background-color-left-panel);
   border-radius: 8px;
   margin-top: 52px;
 }
