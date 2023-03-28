@@ -14,9 +14,6 @@
                 <form method="get">
                     <label>Search:</label>
                     <input type="text" placeholder="Find questions..." wire:model="searchTerm" class="search-input" />
-                    <div wire:click="newApiCall" class="search-input-new-api-call">
-                        <i class="fa-solid fa-rotate-right"></i>
-                    </div>
                 </form>
             </div>
         </div>
@@ -96,9 +93,15 @@
                 </div>                
             </div>
 
+
+
         </div>
 
-        <div class="testing-stats">
+        <div wire:click="newApiCall" class="left-panel-refresh-data">
+            <i class="fa-solid fa-arrows-rotate"></i>
+        </div>
+
+        <div class="left-panel-testing-stats">
             Time: {{ now()->format('H:i:s') }}<br>
             Pageload: {{ $loadTime }} sec<br>
             Payload: {{ $payloadSize }} KB<br>
@@ -199,8 +202,8 @@
                                 <span wire:click="updateInstanceFilter('{{ $ticket->instance }}')" class="ticket-footer-instance-badge">{{ $ticket->instance }}</span>
                             </div>
                         </div>
-
                     </div>
+
                 @endforeach
             </div>
         @endif

@@ -39,7 +39,7 @@
     --badge-category-text: ghostwhite;
     --badge-category-text-size: var(--ticket-footer-text-size);
     --badge-category-border: none;
-    --badge-category-border-color: ghostwhite;    
+    --badge-category-border-color: ghostwhite;
     --badge-category-background: #4a90e2;
     --badge-category-border-radius: var(--border-radius);
     --badge-checkbox-text-size: var(--badge-category-text-size);
@@ -213,12 +213,18 @@ a:active {
 
 /* Container for the checkboxes */
 .checkboxes-container {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   width: 100%;
   margin-top: 8px;
   margin-bottom: 8px;
   gap: 4px;
+}
+
+.checkboxes-container-header {
+  color: var(--forms-placeholder-text-color);
+  align-self: center;
+  font-size: var(--label-size);
 }
 
 /* formerly-checkbox badges  */
@@ -249,14 +255,28 @@ a:active {
   border-radius: var(--badge-checkbox-unselected-border-radius);
 }
 
-.checkboxes-container-header {
-  color: var(--forms-placeholder-text-color);
-  align-self: center;
-  font-size: var(--label-size);
-}
-
 .checkboxes-options {
   font-size: var(--badge-checkbox-text-size);
+}
+
+.left-panel-refresh-data {
+  color: var(--text-color);
+  border: 1px dashed yellow;
+  text-align: center;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 24px;
+  font-size: 2rem;
+}
+
+.left-panel-testing-stats {
+  color: var(--text-color);
+  border: 1px dashed red;
+  border-radius: 8px;
+  text-align: left;
+  padding: 20px;
+  margin-top: 24px;
+  background-color: var(--background-color-left-panel);
 }
 
 .search-results {
@@ -542,15 +562,6 @@ body:not(.dark-mode) .fa-sun {
 }
 
 
-.testing-stats {
-  color: var(--text-color);
-  border: 1px dotted red;
-  padding: 20px;
-  background-color: var(--background-color-left-panel);
-  border-radius: 8px;
-  margin-top: 52px;
-}
-
 /* Preserve darkmode toggle icon against DarkReader shenanigans */
 #dark-mode-toggle i {
   color: var(--text-color);
@@ -568,16 +579,14 @@ body:not(.dark-mode) .fa-sun {
 
 .background-logo {
   color: var(--background-logo-color);
-  position: absolute;
-  left: 46%;
-  top: 33%;
+  display: flex;
+  position: fixed;
+  left: 50%;
+  top: 50%;
   z-index: -9999;
-/*  display: flex;*/
-  /*vertical-align: middle;
   align-items: center;
-  align-self: center;
-  justify-content: center;*/
-  font-size: 16em;
+  justify-content: center;
+  font-size: 14em;
 }
 
 /* Fonts  */
