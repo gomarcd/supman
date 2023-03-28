@@ -110,6 +110,9 @@
     <!-- Center panel -->
     <div class="center-panel">
 
+        <div class="background-logo">
+            <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
+        </div>
         <!-- Display search results  -->
         @if ($searchTerm != "")
             <div class="search-results">
