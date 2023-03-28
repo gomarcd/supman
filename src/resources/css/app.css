@@ -1,39 +1,46 @@
 :root {
-    --font-size: 12px;
+    --font-size: 16px;
+    --forms-text-size: 0.8rem;
+    --badges-text-size: 0.6rem;
     --font-family: 'CamingoCode', monospace;
     --border-radius: 8px;
     --background-color:#f0f0f0;
-    --background-color-center-panel: #ffffff;
+    --background-color-center-panel: #f0f0f0;
+    --background-color-left-panel: #f0f0f0;
     --text-color: #000000;
-    --question-text-size: 12px;
+    --question-text-size: 1rem;
     --question-text-color: #666666;
-    --answer-text-size: 12px;
+    --answer-text-size: 0.8rem;
     --answer-text-color: #5cb609;
     --answer-text-weight: bold;
     --link-color: #5a5a5d;
     --link-hover-color: #4a90e2;
     --label-color: #6C757D;
-    --label-size: 10px;
+    --label-size: 0.6rem;
+    --forms-search-input-text-size: var(--forms-text-size);
     --input-border-color: #ccc;
     --forms-background-color: #fff;
     --forms-border-color: #C6C6C6;
     --forms-border-focus-color: #4a90e2;
     --forms-text-color: #4a90e2;
-    --forms-placeholder-text: #6C757D;
+    --forms-placeholder-text-color: #6C757D;
     --forms-border-radius: var(--border-radius);
     --dropdown-text-color: #4a90e2;
-    --badge-user-text: #4a90e2;
-    --badge-user-border: 1px solid;
-    --badge-user-border-color: #4a90e2;
-    --badge-user-border-radius: var(--border-radius);
-    --badge-user-background:ghostwhite;
+    --ticket-header-text-size: 0.8rem;
+    --ticket-header-user-text-color: #000;    
+    --ticket-footer-instance-badge-text: #4a90e2;
+    --ticket-footer-instance-badge-border: 1px solid;
+    --ticket-footer-instance-badge-border-color: #4a90e2;
+    --ticket-footer-instance-badge-border-radius: var(--border-radius);
+    --ticket-footer-instance-badge-background:ghostwhite;
+    --ticket-footer-text-size: var(--badges-text-size);
     --badge-category-text: ghostwhite;
-    --badge-category-text-size: 8px;
+    --badge-category-text-size: var(--ticket-footer-text-size);
     --badge-category-border: none;
     --badge-category-border-color: ghostwhite;    
     --badge-category-background: #4a90e2;
     --badge-category-border-radius: var(--border-radius);
-    --badge-checkbox-text-size: 8px;
+    --badge-checkbox-text-size: var(--badge-category-text-size);
     --badge-checkbox-selected-text-color: ghostwhite;
     --badge-checkbox-selected-border: 1px solid;
     --badge-checkbox-selected-border-radius: var(--border-radius);
@@ -44,7 +51,6 @@
     --badge-checkbox-unselected-border-color: #6C757D;
     --badge-checkbox-unselected-border-radius: var(--border-radius);
     --badge-checkbox-unselected-background-color: ghostwhite;
-    --ticket-header-user: #000;
     --ticket-card-border-color: #4a90e2;
     --ticket-card-background: #fff;
     --ticket-card-border-radius: var(--border-radius);
@@ -53,43 +59,40 @@
     overflow-y: scroll;
 }
 
+
 /* Using Dracula palette: https://github.com/dracula/dracula-theme  */
 
 .dark-mode {
-/*  --font-size: 12px;
-  --font-family: 'CamingoCode', monospace;*/
-  --background-color: #1c1e2b;
-  --background-color-center-panel: #000000;
+  --background-color: #2c2f42;
+  --background-color-center-panel: #2c2f42;
+  --background-color-left-panel: #161824;
   --text-color: #FFFFFF;
   --answer-text-color: #50fa7b;
   --answer-text-weight: bold;
   --question-text-color: #f8f8f2;
-  --question-text-size: 12px;
   --link-color: #f1fa8c;
   --link-visited-color: #f1fa8c;
   --link-hover-color: #f1fa8c;
   --label-color: #6C757D;
-  --label-size: 10px;
   --input-border-color: #ccc;
   --forms-background-color: #44475a;
   --forms-border-color: #282a36;
   --forms-border-focus-color: #bd93f9;
   --forms-border-radius: var(--border-radius);
   --forms-text-color: #bd93f9;
-  --forms-placeholder-text: #838284;
+  --forms-placeholder-text-color: #838284;
   --dropdown-text-color: #bd93f9;
-  --badge-user-text: #bd93f9;
-  --badge-user-border: 1px solid;
-  --badge-user-border-color: #bd93f9;
-  --badge-user-border-radius: var(--border-radius);
-  --badge-user-background: #44475a;
+  --ticket-header-user-text-color: #bd93f9;
+  --ticket-footer-instance-badge-text: #bd93f9;
+  --ticket-footer-instance-badge-border: 1px solid;
+  --ticket-footer-instance-badge-border-color: #bd93f9;
+  --ticket-footer-instance-badge-border-radius: var(--border-radius);
+  --ticket-footer-instance-badge-background: #44475a;
   --badge-category-text: #ffb86c;
-  --badge-category-text-size: 8px;
   --badge-category-border: none;
   --badge-category-border-color: none;
   --badge-category-background: #44475a;
   --badge-category-border-radius: var(--border-radius);
-  --badge-checkbox-text-size: 8px;
   --badge-checkbox-selected-text-color: ghostwhite;
   --badge-checkbox-selected-border: 1px solid;
   --badge-checkbox-selected-border-radius: var(--border-radius);
@@ -100,7 +103,6 @@
   --badge-checkbox-unselected-border-color: #6C757D;
   --badge-checkbox-unselected-border-radius: var(--border-radius);
   --badge-checkbox-unselected-background-color: #1c1e2b;
-  --ticket-header-user: #bd93f9;
   --ticket-card-border-color: #bd93f9;
   --ticket-card-background: #282a36;
   --ticket-card-border-radius: var(--border-radius);
@@ -114,69 +116,43 @@ html, body {
   margin: 0;
   background-color: var(--background-color) !important;
   color: var(--text-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  box-sizing: border-box;
   font-family: var(--font-family);
 }
 
 .container {
+/*  border: 1px solid yellow;*/
   width: 100%;
-  margin: 8px;
-  padding: 8px;
-  display: flex;
-  align-items: flex-start;
 }
 
 .left-panel {
+  background-color: var(--background-color-left-panel);
+  border-right: 1px solid;
+  border-right-color: var(--ticket-card-border-color);
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  top: 40px;
-  padding: 2px;
-  margin-right: 5px;
-  margin-left: -3px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 24px;
+  padding-top: 48px;
   order: -1;
-  width: 400px;
+  width: 100%;
   max-width: 300px;
-  justify-content: left;
-  align-items: center;
-  align-self: flex-start;
-  height: 100%;
+  height: 100vh;
 }
 
 .center-panel {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  padding: 2px;
+  background-color: var(--background-color-center-panel);
+  padding-top: 44px;
   height: 100%;
-  width: 100%;
-  min-width: 450px;
-  margin: 0px 40px 40px 320px;
+  margin-left: 372px;
+  margin-right: 24px;
 }
-
-/*.right-panel {
-  padding: 2px;
-  margin-left: 5px;
-  margin-right: -3px;
-  order: 1;
-  width: 100%;
-  max-width: 300px;
-  justify-content: left;
-  align-items: flex-start;
-  align-self: flex-start;
-  height: 100%;
-}*/
 
 form {
   max-width: 100%;
 }
 
 label {
-  color: var(--forms-placeholder-text);
+  color: var(--forms-placeholder-text-color);
   font-size: var(--label-size);
   margin-left: 2px;
   margin-bottom: 1px;
@@ -225,6 +201,7 @@ a:active {
 
 /* User dropdown  */
 .user-dropdown {
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -247,7 +224,6 @@ a:active {
   margin-top: 0px;
   margin-right: -3px;
   margin-bottom: 0px;
-  font-size: var(--badge-checkbox-text-size);
   font-family: var(--font-family);
   color: var(--badge-checkbox-selected-text-color);
   border: var(--badge-checkbox-selected-border);
@@ -262,8 +238,6 @@ a:active {
   margin-top: 0px;
   margin-right: -3px;
   margin-bottom: 0px;
-  font-size: var(--badge-checkbox-text-size);
-  font-family: var(--font-family);
   color: var(--badge-checkbox-unselected-text-color);
   border: var(--badge-checkbox-unselected-border);
   border-color: var(--badge-checkbox-unselected-border-color);
@@ -272,14 +246,13 @@ a:active {
 }
 
 .checkboxes-container-header {
-  color: var(--forms-placeholder-text);
+  color: var(--forms-placeholder-text-color);
   align-self: center;
-  font-size: 10px;
+  font-size: var(--label-size);
 }
 
-
 .checkboxes-options {
-  font-size: 10px;
+  font-size: var(--badge-checkbox-text-size);
 }
 
 .search-results {
@@ -299,13 +272,13 @@ a:active {
 .search-input {
   color: var(--forms-text-color);
   background-color: var(--forms-background-color);
-  font-size: 16px;
+  font-size: var(--forms-search-input-text-size);
   font-family: var(--font-family);  
   max-width: 100%;
-  text-align: center;
+  text-align: left;
   outline: none;
   width: 100%;
-  padding: 4px;
+  padding: 4px 4px 4px 9px;
   border: 1px solid var(--forms-border-color);
   border-radius: var(--forms-border-radius);
   margin-bottom: 4px;
@@ -313,8 +286,9 @@ a:active {
 }
 
 .search-input::placeholder {
-    text-align: center;
-    color: var(--forms-placeholder-text);
+    padding-left: 0px;
+    text-align: left;
+    color: var(--forms-placeholder-text-color);
 }
 
 .search-input:focus,
@@ -348,7 +322,7 @@ input[type="checkbox"] {
 
 /* Dropdown styles */
 .dropdown {
-  font-size: 12px;
+  font-size: var(--forms-text-size);
   font-family: var(--font-family);
   color: var(--dropdown-text-color);
   background-color: var(--forms-background-color);
@@ -371,6 +345,8 @@ input[type="checkbox"] {
   display: block;
   justify-content: space-between;
   width: 100%;
+  margin-top: -2px;
+  margin-bottom: 6px;
   gap:4px;
 }
 
@@ -381,7 +357,7 @@ input[type="checkbox"] {
 
 .datepicker-input {
   outline: none;
-  font-size: 12px;
+  font-size: var(--forms-text-size);
   font-family: var(--font-family);
   color: var(--dropdown-text-color);
   background-color: var(--forms-background-color);
@@ -494,15 +470,14 @@ body:not(.dark-mode) .fa-sun {
 
 /* wraps header to get id in the corner */
 .ticket-header {
-  font-size: 12px;
-  color: var(--ticket-header-user);
+  font-size: var(--ticket-header-text-size);
+  color: var(--ticket-header-user-text-color);
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
 }
 
 .ticket-id {
-/*  font-size: 12px;*/
   margin-left: auto;
 }
 
@@ -521,7 +496,7 @@ body:not(.dark-mode) .fa-sun {
 /* category badges in the ticket footer  */
 .ticket-footer-category-badge {
   display: inline-flex;
-  padding: 0px 5px 1px 5px;
+  padding: 0.5px 5.5px 1.5px 5.5px;
   margin-top: 8px;
   margin-left: -1px;
   margin-right: -3px;
@@ -543,13 +518,13 @@ body:not(.dark-mode) .fa-sun {
   margin-top: 8px;
   margin-right: -1px;
   margin-bottom: 0px;
-  font-size: 8px;
+  font-size: var(--ticket-footer-text-size);
   font-family: var(--font-family);
-  color: var(--badge-user-text);
-  border: var(--badge-user-border);
-  border-color: var(--badge-user-border-color);
-  background-color: var(--badge-user-background);
-  border-radius: var(--badge-user-border-radius);
+  color: var(--ticket-footer-instance-badge-text);
+  border: var(--ticket-footer-instance-badge-border);
+  border-color: var(--ticket-footer-instance-badge-border-color);
+  background-color: var(--ticket-footer-instance-badge-background);
+  border-radius: var(--ticket-footer-instance-badge-border-radius);
   vertical-align: middle; 
 }
 
@@ -562,6 +537,15 @@ body:not(.dark-mode) .fa-sun {
   background-color: var(--scrollbar-thumb);
 }
 
+
+.testing-stats {
+  color: var(--text-color);
+  border: 1px dotted red;
+  padding: 20px;
+  background-color: var(--forms-background-color);
+  border-radius: 8px;
+  margin-top: 52px;
+}
 
 /* Preserve darkmode toggle icon against DarkReader shenanigans */
 #dark-mode-toggle i {

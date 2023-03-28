@@ -1,11 +1,6 @@
 <div wire:poll=refreshData class="container">
     <!-- Left panel -->
     <div class="left-panel">
-        Stats:<br><br>
-        Time: {{ now()->format('H:i:s') }}<br>
-        Pageload: {{ $loadTime }} sec<br>
-        Payload: {{ $payloadSize }} KB<br>
-        Refresh: {{ $timeRefresh }}
 
         <div class="search-input-container">
             <!-- Dark mode toggle -->
@@ -103,7 +98,12 @@
 
         </div>
 
-
+        <div class="testing-stats">
+            Time: {{ now()->format('H:i:s') }}<br>
+            Pageload: {{ $loadTime }} sec<br>
+            Payload: {{ $payloadSize }} KB<br>
+            Refresh: {{ $timeRefresh }}
+        </div>
 
     </div>
 
@@ -204,6 +204,4 @@
 
     </div>
 
-    <!-- Right panel -->
-    <!-- <div class="right-panel"></div> -->
 </div>
