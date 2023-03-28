@@ -261,13 +261,20 @@ a:active {
 .left-panel-refresh-data {
   color: var(--text-color);
   border: 1px dashed;
+  background-color: var(--background-color-left-panel);
   border-color: var(--border-color-left-panel);
   text-align: center;
   border-radius: 8px;
   padding: 20px;
   margin-top: 24px;
-  font-size: 2rem;
+  font-size: 1.2rem;
+  width: 100%;
   box-shadow: var(--ticket-card-box-shadow);
+}
+
+.left-panel-refresh-data:hover {
+  background-color: var(--ticket-card-background);
+  cursor: pointer;
 }
 
 .left-panel-testing-stats {
