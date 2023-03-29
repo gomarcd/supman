@@ -11,7 +11,7 @@
 
             <!-- Search field -->
             <div>
-                <form method="get">
+                <form method="get" onsubmit="return false;">
                     <label>Search:</label>
                     <input type="text" placeholder="Find questions..." wire:model="searchTerm" class="search-input" />
                 </form>
