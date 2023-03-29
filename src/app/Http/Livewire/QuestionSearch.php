@@ -22,6 +22,8 @@ class QuestionSearch extends Component
     public $toDate;
     public $instanceFilter;
     public $timeRefresh;
+    public $userRefreshingAPI;
+    public $ToastUserRefreshedAPI;
 
     public function mount()
     {
@@ -269,7 +271,7 @@ class QuestionSearch extends Component
         // Look for the cached data first
         $getTickets = Cache::get('getTickets');
 
-        // Check if the cache is empty or not
+        // If cache is empty, do API call
         if (empty($getTickets)) {
             try {
                 $getTickets = ((new getTickets())->withQuestions());

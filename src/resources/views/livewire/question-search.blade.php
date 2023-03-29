@@ -98,8 +98,10 @@
         </div>
 
         <button wire:click="newApiCall" class="left-panel-refresh-data">
-            <i class="fa-solid fa-arrows-rotate"></i> Refresh API
+            <i wire:loading.class="fa-solid fa-arrows-rotate fa-spin" class="fa-solid fa-arrows-rotate"></i>                 
+                Refresh API
         </button>
+
 
         <div class="left-panel-testing-stats">
             Pageload: {{ $loadTime }} sec<br>
