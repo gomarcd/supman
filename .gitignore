@@ -6,6 +6,7 @@
 /src/database
 /src/tests
 /src/vendor
+/src/storage
 /src/cron.log
 /src/supervisord.log
 /nginx/conf.d/logs
