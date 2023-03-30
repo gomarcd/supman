@@ -1,6 +1,6 @@
 version: "3"
 services:
-  supman-docker:
+  supman:
     build:
       context: .
       dockerfile: Dockerfile
