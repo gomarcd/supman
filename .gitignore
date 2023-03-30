@@ -9,6 +9,7 @@
 /src/storage
 /src/cron.log
 /src/supervisord.log
+/src/.env
 /nginx/conf.d/logs
 /redis-data
 docker-compose.yml
