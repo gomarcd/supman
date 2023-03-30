@@ -7,6 +7,7 @@ use App\Services\getTickets;
 use App\Services\coreTest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 
 class QuestionSearch extends Component
 {
@@ -78,6 +79,15 @@ class QuestionSearch extends Component
         $tickets = $getTickets->tickets;
 
         $filteredQuestions = $this->getFilteredQuestions($tickets, $this->searchTerm);
+
+        // Get the auth'd user
+        $token = Cookie::get('jwt_token');
+        $this->userEmail = null;
+        if ($token) {
+            $key = env('JWT_SECRET');
+            $payload = JWT::decode($token, new Key($key, 'HS256'));
+            $this->userEmail = $payload->email;
+        }
 
         return view('livewire.question-search');
     }
