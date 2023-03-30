@@ -4,7 +4,6 @@
 /src/public/hot
 /src/public/storage
 /src/database
-/src/storage
 /src/tests
 /src/vendor
 /src/cron.log

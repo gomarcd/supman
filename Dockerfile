@@ -32,6 +32,10 @@ RUN chown root:root /etc/cron.d/api
 RUN crontab /etc/cron.d/api
 
 COPY ./src/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#RUN mkdir -p /var/log/php && touch /var/log/php/php-fpm.log && chown -R www-data:www-data /var/log/php
+#RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+#RUN echo "error_log = /var/log/php/php-fpm.log" >> /usr/local/etc/php/php.ini
+#RUN echo "error_log = /var/log/php/php-fpm.log" >> /usr/local/etc/php-fpm.conf
 
 RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 

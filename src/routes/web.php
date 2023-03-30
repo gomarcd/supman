@@ -16,9 +16,16 @@ use App\Http\Middleware\VerifyToken;
 |
 */
 
+// Uncomment this one for dev
 Route::get('/', function () {
     return view('welcome');
-})->middleware(VerifyToken::class);
+});
+
+
+// Uncomment this one for prod
+// Route::get('/', function () {
+//     return view('welcome');
+// })->middleware(VerifyToken::class);
 
 // Redirect the user to Google login
 Route::get('/auth/redirect', function () {

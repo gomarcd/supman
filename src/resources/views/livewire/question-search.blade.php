@@ -97,8 +97,8 @@
 
         </div>
 
-        <button wire:click="newApiCall" class="left-panel-refresh-data">
-            <i wire:loading.class="fa-solid fa-arrows-rotate fa-spin" class="fa-solid fa-arrows-rotate"></i>                 
+        <button wire:click="newApiCall" wire:target="userRefreshingAPI" class="left-panel-refresh-data">
+            <i wire:loading.class="fa-solid fa-arrows-rotate fa-spin" class="fa-solid fa-arrows-rotate"></i> 
                 Refresh API
         </button>
 

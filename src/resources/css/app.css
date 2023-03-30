@@ -277,6 +277,10 @@ a:active {
   cursor: pointer;
 }
 
+.left-panel-refresh-data-loading i.fa-solid.fa-arrows-rotate {
+  animation: fa-spin 2s infinite linear;
+}
+
 .left-panel-testing-stats {
   color: var(--text-color);
   border: 1px dashed;
