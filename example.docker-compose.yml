@@ -6,14 +6,8 @@ services:
       dockerfile: Dockerfile
     image: gomarcd/supman
     container_name: supman
-    working_dir: /var/www
     restart: always
     volumes:
       - "./.env:/var/www/.env"
     ports:
       - "8080:80"
-    networks:
-      - supman
-networks:
-  supman:
-    driver: bridge
