@@ -8,6 +8,11 @@ use App\Services\coreTest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Google\Client;
 
 class QuestionSearch extends Component
 {
@@ -80,13 +85,15 @@ class QuestionSearch extends Component
 
         $filteredQuestions = $this->getFilteredQuestions($tickets, $this->searchTerm);
 
-        // Get the auth'd user
-        $token = Cookie::get('jwt_token');
-        $this->userEmail = null;
+        // Set $userName from JWT cookie
+        $request = request();
+        $token = $request->cookie('jwt_token');
+        $key = env('JWT_SECRET');
         if ($token) {
-            $key = env('JWT_SECRET');
             $payload = JWT::decode($token, new Key($key, 'HS256'));
-            $this->userEmail = $payload->email;
+            $this->userName = $payload->firstName;
+        } else {
+            $this->userName = null;
         }
 
         return view('livewire.question-search');
@@ -238,19 +245,16 @@ class QuestionSearch extends Component
                 $this->userFilter = $user;
             }
         }
-        // $this->render();
     }
 
     public function onUpdateFromDate($date)
     {
         $this->fromDate = $date;
-        // $this->render();
     }
 
     public function onUpdateToDate($date)
     {
         $this->toDate = $date;
-        // $this->render();
     }
 
     public function updateDateFilter($date)
@@ -260,7 +264,6 @@ class QuestionSearch extends Component
         } else {
             $this->dateFilter = $date;
         }
-        // $this->render();
     }
 
     public function updateInstanceFilter($instance)
@@ -270,7 +273,6 @@ class QuestionSearch extends Component
         } else {
             $this->instanceFilter = $instance;
         }
-        // $this->render();
     }
 
     public function refreshData()
@@ -305,4 +307,8 @@ class QuestionSearch extends Component
         Cache::put('getTickets', $getTickets, 5);
     }
 
+    public function logout()
+    {
+        return redirect('/logout');
+    }
 }

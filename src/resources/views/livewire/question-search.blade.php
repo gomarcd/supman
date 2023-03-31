@@ -1,7 +1,7 @@
 <div wire:poll=refreshData class="container">
     <!-- Left panel -->
     <div class="left-panel">
-        Hello {{ $userEmail }}
+        <div>Hello {{ $userName }} <span wire:click="logout">Log Out</span></div>
         <div class="search-input-container">
             <!-- Dark mode toggle -->
             <button id="dark-mode-toggle" class="dark-mode-toggle">

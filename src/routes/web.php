@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Firebase\JWT\JWT;
 use App\Http\Middleware\VerifyToken;
+use Illuminate\Support\Facades\Http;
+use Google\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +18,15 @@ use App\Http\Middleware\VerifyToken;
 |
 */
 
-// Uncomment this one for dev
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-// Uncomment this one for prod
-// Route::get('/', function () {
-//     return view('welcome');
-// })->middleware(VerifyToken::class);
+// Apply the oauth2 Middleware only in production
+if (App::environment('production')) {
+    Route::get('/', function () {
+    })->middleware(VerifyToken::class);
+} else {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+}
 
 // Redirect the user to Google login
 Route::get('/auth/redirect', function () {
@@ -35,6 +36,7 @@ Route::get('/auth/redirect', function () {
 // User redirected here from Google after auth with them
 Route::get('/auth/goog', function () {
     $user = Socialite::driver('google')->user();
+    $googleToken = $user->token;
 
     // Check if the user in whitelist
     $authorizedEmail = explode(',', env('AUTH_EMAIL'));
@@ -44,18 +46,34 @@ Route::get('/auth/goog', function () {
         $key = env('JWT_SECRET');
         $payload = array(
             "email" => $user->getEmail(),
+            "firstName" => $user->user['given_name']
         );
-
         $token = JWT::encode($payload, $key, 'HS256');
 
         // Store the JWT token in a cookie
         $cookie = cookie('jwt_token', $token, 525600);
 
+        // Store the Google oauth2 token in a cookie
+        $googleTokenCookie = cookie('google_token', $googleToken, 525600);
+
         // Email is authorized, show site
-        return redirect('/')->withCookie($cookie);
+        return redirect('/')->withCookie($cookie)->withCookie($googleTokenCookie);
     } else {
         // Email is not authorized, show error message
         return 'Unauthorized';
     }
+});
 
+// Log user out
+Route::get('/logout', function () {
+    // Get the stored google oauth2 access token
+    $googleToken = Cookie::get('google_token');
+
+    // Revoke that token using Google API Client
+    $googleClient = new Client();
+    $googleClient->setAccessToken($googleToken);
+    $googleClient->revokeToken();
+    $cookie = Cookie::forget('jwt_token');
+    $googleToken = Cookie::forget('google_token');
+    return redirect('/auth/redirect');
 });
