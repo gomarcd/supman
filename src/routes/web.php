@@ -21,6 +21,7 @@ use Google\Client;
 // Apply the oauth2 Middleware only in production
 if (App::environment('production')) {
     Route::get('/', function () {
+        return view('welcome');
     })->middleware(VerifyToken::class);
 } else {
     Route::get('/', function () {
