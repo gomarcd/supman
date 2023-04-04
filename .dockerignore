@@ -1,5 +1,8 @@
 src/.env
 src/.env.production
 src/.env.dev
+src/.env.example-dev
+src/.env.example-production
 src/cron.log
 src/supervisord.log
+src/storage

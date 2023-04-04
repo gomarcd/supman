@@ -67,14 +67,22 @@ Route::get('/auth/goog', function () {
 
 // Log user out
 Route::get('/logout', function () {
-    // Get the stored google oauth2 access token
+
+    // Get oauth2 access token
     $googleToken = Cookie::get('google_token');
 
-    // Revoke that token using Google API Client
-    $googleClient = new Client();
-    $googleClient->setAccessToken($googleToken);
-    $googleClient->revokeToken();
-    $cookie = Cookie::forget('jwt_token');
-    $googleToken = Cookie::forget('google_token');
-    return redirect('/auth/redirect');
+    if ($googleToken !== null && $googleToken !== '') {
+
+        // Revoke their google oauth2 token from google
+        $googleClient = new Client();
+        $googleClient->setAccessToken($googleToken);
+        $googleClient->revokeToken();
+
+        // Forget both the google oauth2 and JWT tokens and redirect to login
+        $cookie = Cookie::forget('jwt_token');
+        $googleToken = Cookie::forget('google_token');
+        return redirect('/auth/redirect')->withCookie($cookie)->withCookie($googleToken);
+    } else {
+        return redirect('/auth/redirect');
+    }
 });
