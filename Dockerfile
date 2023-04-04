@@ -1,6 +1,5 @@
 FROM composer:latest as composer
 ADD ./src/ /var/www/
-RUN mkdir -p storage/framework/{views,sessions,cache}
 WORKDIR /var/www
 RUN test -d storage/framework/views || mkdir -p storage/framework/views \
     && test -d storage/framework/sessions || mkdir -p storage/framework/sessions \
