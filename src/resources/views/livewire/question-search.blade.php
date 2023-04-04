@@ -1,6 +1,6 @@
 <div wire:poll="refreshData" class="container">
     <!-- Dark mode toggle -->
-    <button id="dark-mode-toggle" class="dark-mode-toggle">
+    <button wire:ignore id="dark-mode-toggle" class="dark-mode-toggle">
       <i class="fa fa-sun"></i>
       <i class="fa fa-moon"></i>
     </button>
