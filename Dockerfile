@@ -32,7 +32,7 @@ RUN crontab /etc/cron.d/api
 
 COPY ./src/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/public /var/www/storage /var/www/bootstrap/cache
 RUN chmod -R 755 /var/www/bootstrap/cache
 
 WORKDIR /var/www
