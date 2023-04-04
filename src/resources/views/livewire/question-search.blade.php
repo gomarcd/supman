@@ -1,4 +1,9 @@
 <div wire:poll="refreshData" class="container">
+    <!-- Dark mode toggle -->
+    <button id="dark-mode-toggle" class="dark-mode-toggle">
+      <i class="fa fa-sun"></i>
+      <i class="fa fa-moon"></i>
+    </button>
     <!-- Left panel -->
     <div class="left-panel">
 
@@ -7,12 +12,6 @@
         </div>
 
         <div class="search-input-container">
-            <!-- Dark mode toggle -->
-            <button id="dark-mode-toggle" class="dark-mode-toggle">
-              <i class="fa fa-sun"></i>
-              <i class="fa fa-moon"></i>
-            </button>
-
             <!-- Search field -->
             <div>
                 <form method="get" onsubmit="return false;">

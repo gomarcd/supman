@@ -288,27 +288,6 @@ a:active {
   box-shadow: var(--ticket-card-box-shadow);
 }
 
-.left-panel-refresh-data:hover {
-  background-color: var(--ticket-card-background);
-  cursor: pointer;
-}
-
-.left-panel-refresh-data-loading i.fa-solid.fa-arrows-rotate {
-  animation: fa-spin 2s infinite linear;
-}
-
-.left-panel-testing-stats {
-  color: var(--text-color);
-  border: 1px dashed;
-  border-color: var(--border-color-left-panel);
-  border-radius: 8px;
-  text-align: left;
-  padding: 20px;
-  margin-top: 24px;
-  background-color: var(--background-color-left-panel);
-  box-shadow: var(--ticket-card-box-shadow);
-}
-
 .search-results {
   margin-top: 25px;
 }
