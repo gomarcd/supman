@@ -2,13 +2,10 @@
     <!-- Left panel -->
     <div class="left-panel">
 
-        <div class="user-login-bar">
+        <div wire:click="logout" class="user-login-bar">
             <i class="fa-solid fa-right-from-bracket"></i>
         </div>
 
-<!--         @if($userName)
-        <div>Hello {{ $userName }} <span wire:click="logout">Log Out</span></div>
-        @endif -->
         <div class="search-input-container">
             <!-- Dark mode toggle -->
             <button id="dark-mode-toggle" class="dark-mode-toggle">
