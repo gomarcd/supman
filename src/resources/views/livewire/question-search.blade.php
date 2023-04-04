@@ -1,9 +1,14 @@
 <div wire:poll="refreshData" class="container">
     <!-- Left panel -->
     <div class="left-panel">
-        @if($userName)
+
+        <div class="user-login-bar">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+
+<!--         @if($userName)
         <div>Hello {{ $userName }} <span wire:click="logout">Log Out</span></div>
-        @endif
+        @endif -->
         <div class="search-input-container">
             <!-- Dark mode toggle -->
             <button id="dark-mode-toggle" class="dark-mode-toggle">
