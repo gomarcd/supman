@@ -1,7 +1,9 @@
-<div wire:poll=refreshData class="container">
+<div wire:poll="refreshData" class="container">
     <!-- Left panel -->
     <div class="left-panel">
+        @if($userName)
         <div>Hello {{ $userName }} <span wire:click="logout">Log Out</span></div>
+        @endif
         <div class="search-input-container">
             <!-- Dark mode toggle -->
             <button id="dark-mode-toggle" class="dark-mode-toggle">
@@ -93,21 +95,17 @@
                 </div>                
             </div>
 
-
-
         </div>
 
-        <button wire:click="newApiCall" class="left-panel-refresh-data">
-            <i wire:loading.class="fa-solid fa-arrows-rotate fa-spin" class="fa-solid fa-arrows-rotate"></i>
-            <span wire:loading.remove wire:target="newApiCall">Refresh API</span><span wire:loading wire:target="newApiCall">Refreshing...</span>
-        </button>
-
-        <div class="left-panel-testing-stats">
-            Pageload: {{ $loadTime }} sec<br>
-            Payload: {{ $payloadSize }} KB<br>
-            Refresh: {{ $timeRefresh }}
+        <div class="checkboxes-container">
+            <div class="checkboxes-container-header">Refresh:</div>
+            <div>
+                <button wire:click="newApiCall" class="api-refresh">
+                    <i wire:target="newApiCall" class="fa-solid fa-arrows-rotate" wire:loading.class="fa-spin"></i>
+                </button>
+            </div>
         </div>
-
+    
     </div>
 
     <!-- Center panel -->

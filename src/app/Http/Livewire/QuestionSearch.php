@@ -27,19 +27,12 @@ class QuestionSearch extends Component
     public $fromDate;
     public $toDate;
     public $instanceFilter;
-    public $timeRefresh;
-    public $userRefreshingAPI;
-    public $ToastUserRefreshedAPI;
+    public $isRefreshing = false;
 
     public function mount()
     {
         // Set instance URL
         $this->instance_url = env('INSTANCE_URL');
-
-        $timeRefresh=0;
-
-        // Start timing load
-        $loadTimeStart = microtime(true);
 
         // Check cache first, call API if null
         $getTickets = Cache::get('getTickets');
@@ -52,19 +45,11 @@ class QuestionSearch extends Component
         $this->tickets = $getTickets->tickets;
         $this->ticketCategories = ($getTickets->ticketCategories)->filter(function($category) {return $category !== null;})->values();
         $this->ticketUsers = ($getTickets->ticketUsers)->filter(function($user) {return $user !== null;})->values();
-
-        // Payload size
-        $this->payloadSize = round((strlen(json_encode($getTickets)) / 1024), 2);
-
-        // Stop timing load
-        $loadTimeStop = microtime(true);
-
-        // API call load time
-        $this->loadTime = round(($loadTimeStop - $loadTimeStart), 4);
-        
+       
         $this->answerFilter = true;
         $this->missingUserFilter = true;
         $this->noCategoryFilter = true;
+
         // Workaround proposed by author of Livewire: https://github.com/livewire/livewire/issues/27
         // Makes sure Livewire component's methods and view get an object instead of array
         session()->put('tickets', $this->tickets);
@@ -215,6 +200,7 @@ class QuestionSearch extends Component
         }   
     }
 
+    // Update to/from date fields when selected or cleared (event listener in resources/js/datepicker.js)
     protected $listeners = [
         'updateFromDate' => 'onUpdateFromDate',
         'updateToDate' => 'onUpdateToDate',
@@ -277,34 +263,35 @@ class QuestionSearch extends Component
 
     public function refreshData()
     {
-        // Start timing the refresh
-        $startTimeRefresh = microtime(true);
+        if (!$this->isRefreshing) {
+            // Look for the cached data first
+            $getTickets = Cache::get('getTickets');
 
-        // Look for the cached data first
-        $getTickets = Cache::get('getTickets');
-
-        // If cache is empty, do API call
-        if (empty($getTickets)) {
-            try {
-                $getTickets = ((new getTickets())->withQuestions());
-                Cache::put('getTickets', $getTickets, now()->addMinutes(15));
-            } catch (\Throwable $th) {
-                // Log the error message
-                Log::error('Error fetching tickets data: ' . $th->getMessage());
-                return;
+            // If cache is empty, do API call
+            if (empty($getTickets)) {
+                try {
+                    $getTickets = ((new getTickets())->withQuestions());
+                    Cache::put('getTickets', $getTickets, now()->addMinutes(15));
+                } catch (\Throwable $th) {
+                    // Log the error message
+                    Log::error('Error fetching tickets data: ' . $th->getMessage());
+                    return;
+                }
             }
+
+            $this->tickets = $getTickets->tickets;
         }
 
-        $this->tickets = $getTickets->tickets;
-
-        $stopTimeRefresh = microtime(true);
-        $this->timeRefresh = round(($stopTimeRefresh - $startTimeRefresh), 4);
     }
 
     public function newApiCall() 
     {
-        $getTickets = ((new getTickets())->withQuestions());
-        Cache::put('getTickets', $getTickets, 5);
+        if (!$this->isRefreshing) {
+            $this->isRefreshing = true;
+            $getTickets = ((new getTickets())->withQuestions());
+            Cache::put('getTickets', $getTickets, 5);
+            $this->isRefreshing = false;
+        }
     }
 
     public function logout()

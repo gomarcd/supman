@@ -258,6 +258,14 @@ a:active {
   font-size: var(--badge-checkbox-text-size);
 }
 
+.api-refresh {
+  display: flex;
+  color: var(--text-color);
+  background-color: var(--background-color-left-panel);
+  border: none;
+  cursor: pointer;
+}
+
 .left-panel-refresh-data {
   color: var(--text-color);
   border: 1px dashed;
@@ -267,6 +275,7 @@ a:active {
   border-radius: 8px;
   padding: 20px;
   margin-top: 24px;
+  font-family: var(--font-family);
   font-size: 1.2rem;
   width: 100%;
   box-shadow: var(--ticket-card-box-shadow);
@@ -311,7 +320,7 @@ a:active {
   color: var(--forms-text-color);
   background-color: var(--forms-background-color);
   font-size: var(--forms-search-input-text-size);
-  font-family: var(--font-family);  
+  font-family: var(--font-family);
   max-width: 100%;
   text-align: left;
   outline: none;
