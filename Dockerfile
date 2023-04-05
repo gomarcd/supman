@@ -20,24 +20,14 @@ COPY --from=node /var/www /var/www
 RUN docker-php-ext-install pdo_mysql && apk add --no-cache autoconf build-base nginx dcron redis supervisor \
     && pecl install redis && docker-php-ext-enable redis
 
-# RUN docker-php-ext-install pdo_mysql && apt-get update \ 
-#    && apt-get update && apt-get install -y nginx cron redis-server supervisor \
-#    && pecl install redis && docker-php-ext-enable redis
-
 COPY ./src/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./src/cron /etc/crontabs/root
-#COPY ./src/cron /etc/cron.d/api
 COPY nginx/conf.d/app.conf /etc/nginx/conf.d/app.conf
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 RUN chmod 0644 /etc/crontabs/root \
-    && chown -R www-data:www-data /var/www/public /var/www/storage /var/www/bootstrap/cache \
-    && chmod -R 755 /var/www/bootstrap/cache
-
-# RUN chmod 0644 /etc/cron.d/api && chown root:root /etc/cron.d/api && crontab /etc/cron.d/api \
-#    && chown -R www-data:www-data /var/www/public /var/www/storage /var/www/bootstrap/cache \
-#    && chmod -R 755 /var/www/bootstrap/cache \
-#    && apt-get update && apt-get upgrade -y
+    && chown -R www-data:www-data /var/www/public /var/www/storage /var/www/bootstrap/cache /var/lib/nginx \
+    && chmod -R 755 /var/www/bootstrap/cache /var/lib/nginx
 
 WORKDIR /var/www
 RUN rm -rf /var/www/html && apk del build-base && apk add --update-cache && rm -rf /var/cache/apk/*
