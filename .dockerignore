@@ -5,4 +5,4 @@ src/.env.example-dev
 src/.env.example-production
 src/cron.log
 src/supervisord.log
-src/storage
+src/storage/*
