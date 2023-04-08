@@ -11,18 +11,17 @@
             <i class="fa-solid fa-right-from-bracket"></i>
         </div>
 
-        <div class="search-input-container">
-            <!-- Search field -->
-            <div>
-                <form method="get" onsubmit="return false;">
-                    <label>Search:</label>
-                    <input type="text" placeholder="Find questions..." wire:model="searchTerm" class="search-input" />
-                </form>
-            </div>
-        </div>
-
-        <!-- Dropdowns -->
+        <!-- Forms & Dropdowns -->
         <div class="dropdowns-container">
+
+            <!-- Search -->
+            <div class="search-input-container">
+                <!-- Search field -->
+                    <form method="get" onsubmit="return false;">
+                        <label>Search:</label>
+                        <input type="text" placeholder="Find questions..." wire:model="searchTerm" class="search-input" />
+                    </form>
+            </div>
 
             <!-- Category dropdown -->
             <div class="category-dropdown">            
@@ -75,9 +74,6 @@
         <!-- Checkbox Container -->
         <div class="checkboxes-container">
 
-            <!-- Checkbox header -->
-            <div class="checkboxes-container-header">Show with:</div>
-
             <!-- Checkboxes -->
             <div class="checkboxes-options">
 
@@ -93,18 +89,15 @@
                 <!-- Show Users -->
                 <div wire:model="missingUserFilter" wire:click="$toggle('missingUserFilter')" class="{{ $missingUserFilter ? 'checkbox-badges' : 'checkbox-badges-unchecked' }}">
                     User
-                </div>                
+                </div>
             </div>
 
         </div>
 
-        <div class="checkboxes-container">
-            <div class="checkboxes-container-header">Refresh:</div>
-            <div>
-                <button wire:click="newApiCall" class="api-refresh">
-                    <i wire:target="newApiCall" class="fa-solid fa-arrows-rotate" wire:loading.class="fa-spin"></i>
-                </button>
-            </div>
+        <div class="api-refresh-container">
+            <button wire:click="newApiCall" class="api-refresh-button">
+                <i wire:target="newApiCall" class="fa-solid fa-arrows-rotate" wire:loading.class="fa-spin"></i>
+            </button>
         </div>
     
     </div>
@@ -123,35 +116,22 @@
                     <div class="ticket-card">
 
                         <!-- Ticket card Header -->
-                        <div class="ticket-header">
+                        <div class="ticket-card-header">
+                            <!-- User badge -->
+                            @if($ticket->user)
+                                <span wire:click="updateUserFilter('{{ $ticket->user }}')" class="{{ $userFilter ? 'ticket-card-header-user-selected' : 'ticket-card-header-user'}}">{{ $ticket->user }}</span> @
+                            @else
+                                <!-- Display something if ticket has no user -->
+                                <span wire:model="missingUserFilter" wire:click="$toggle('missingUserFilter')" class="{{ $missingUserFilter ? 'ticket-card-header-user' : 'ticket-card-header-user-selected' }}">No user</span> @ 
+                            @endif
 
-                            <!-- Date, instance & user badges -->
-                            <div class="ticket-details">
-
-                                <!-- User badge -->
-                                @if($ticket->user)
-                                    <span wire:click="updateUserFilter('{{ $ticket->user }}')">{{ $ticket->user }}</span> @
-                                    <!-- <span wire:click="updateUserFilter('{{ $ticket->user }}')" class="date-user-badges">{{ $ticket->user }}</span> -->
-                                @else
-                                    <!-- Display something if ticket has no user -->
-                                    <span wire:click="updateUserFilter('No user')">No user</span> @                               
-                                    <!-- <span wire:click="updateUserFilter('No user')" class="date-user-badges">No user</span> -->
-                                @endif
-
-                                <!-- Date badge-->
-                                <span wire:click="updateDateFilter('{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}')">{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}</span>                                
-                                <!-- <span wire:click="updateDateFilter('{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}')" class="date-user-badges">{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}</span> -->
-
-                                <!-- Instance badge -->
-                                <!-- <span wire:click="updateInstanceFilter('{{ $ticket->instance }}')" class="date-user-badges">{{ $ticket->instance }}</span> -->
-
-                            </div>
+                            <!-- Date badge-->
+                            <span wire:click="updateDateFilter('{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}')" class="{{ $dateFilter ? 'ticket-card-header-date-selected' : 'ticket-card-header-date'}} ">{{ Carbon\Carbon::parse($ticket->questionCreatedAt)->format('Y-m-d') }}</span>
 
                             <!-- Ticket id -->
-                            <div class="ticket-id">
+                            <div class="ticket-card-header-ticket-id">
                                 <a href="{{ $instance_url }}app#/tickets/show/{{ $ticket->id }}" target="_blank">Ticket {{ $ticket->id }}</a>
-                            </div>
-
+                            </div>                            
                         </div>
 
                         <!-- Question section -->
@@ -169,7 +149,7 @@
                                     {!! $ticket->answer ? $ticket->answer :
                                         '<span wire:model="answerFilter"
                                             wire:click="$toggle(\'answerFilter\')"
-                                            class="no-answer clickable">No answer yet :(
+                                            class="answer-no-answer">No answer yet :(
                                         </span>'
                                     !!}
                                 </span>
@@ -179,27 +159,37 @@
                         <!-- Ticket card Footer -->
                         <div class="ticket-footer">
 
-                            <!-- Display ticket category as badges -->
+                            <!-- Ticket category badges - highlight when toggled -->
                             <div>
+                                <!-- Sort by toggled badge -->
                                 @if($ticket->category)
-                                    @foreach($ticket->category as $category)
-                                        <!-- Category badges -->
-                                        <div wire:click="updateCategoryFilter('{{ $category }}')" class="ticket-footer-category-badge">
-                                            {{ $category }}
-                                        </div>
-                                    @endforeach
+                                      @php
+                                        $categories = $ticket->category;
+                                        $selectedCategoryIndex = array_search($categoryFilter, $categories);
+                                        if ($selectedCategoryIndex !== false) {
+                                          $selectedCategory = $categories[$selectedCategoryIndex];
+                                          unset($categories[$selectedCategoryIndex]);
+                                          array_unshift($categories, $selectedCategory);
+                                        }
+                                      @endphp
+                                  @foreach($categories as $category)
+                                    <div wire:click="updateCategoryFilter('{{ $category }}')" class="ticket-footer-category-badge {{ $categoryFilter == $category ? 'ticket-footer-category-badge-selected' : '' }}">
+                                      {{ $category }}
+                                    </div>
+                                  @endforeach
                                 @else
-                                    <!-- Display something if ticket has no category -->
-                                    <div wire:click="updateCategoryFilter('No category')" class="ticket-footer-category-badge">
+                                    <!-- Badge for no categories -->
+                                    <div wire:click="updateCategoryFilter('No category')" class="ticket-footer-category-badge {{ $noCategoryFilter == false ? 'ticket-footer-category-badge-selected' : '' }} ">
                                         No categories
                                     </div>
-                                @endif                                
+                                @endif
                             </div>
 
-                            <!-- Instance badge -->
-                            <div>
-                                <span wire:click="updateInstanceFilter('{{ $ticket->instance }}')" class="ticket-footer-instance-badge">{{ $ticket->instance }}</span>
+                            <!-- Instance badge - highlight when toggled -->
+                            <div wire:click="updateInstanceFilter('{{ $ticket->instance }}')" class="{{ $instanceFilter ? 'ticket-footer-instance-badge-selected' : 'ticket-footer-instance-badge'}}">
+                                {{ $ticket->instance }}
                             </div>
+
                         </div>
                     </div>
 

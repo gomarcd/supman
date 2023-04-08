@@ -1,7 +1,9 @@
 :root {
-    --font-size: 16px;
-    --forms-text-size: 0.8rem;
-    --badges-text-size: 0.6rem;
+    font-size: 16px;
+    --forms-text-size: 1.5rem;
+    --forms-margin-top: 14px;
+    --label-margin-bottom: 4px;
+    --badges-text-size: 1rem;
     --font-family: 'CamingoCode', monospace;
     --border-radius: 8px;
     --background-color:#f0f0f0;
@@ -10,15 +12,17 @@
     --background-logo-color: #dcdcdc;
     --border-color-left-panel: #C6C6C6;
     --text-color: #000000;
-    --question-text-size: 1rem;
+    --question-text-size: 1.8rem;
     --question-text-color: #666666;
-    --answer-text-size: 0.8rem;
+    --answer-text-size: 1.4rem;
     --answer-text-color: #5cb609;
     --answer-text-weight: bold;
+    --answer-no-answer-text-color:#5cb609;
+    --answer-no-answer-text-hover-color: #5cb609;
     --link-color: #5a5a5d;
     --link-hover-color: #4a90e2;
     --label-color: #6C757D;
-    --label-size: 0.6rem;
+    --label-size: 1.2rem;
     --forms-search-input-text-size: var(--forms-text-size);
     --input-border-color: #ccc;
     --forms-background-color: #fff;
@@ -28,35 +32,51 @@
     --forms-placeholder-text-color: #6C757D;
     --forms-border-radius: var(--border-radius);
     --dropdown-text-color: #4a90e2;
-    --ticket-header-text-size: 0.8rem;
-    --ticket-header-user-text-color: #000;    
+    --badge-border-radius: 12px;
+    --ticket-header-text-size: 1.2rem;
+    --ticket-header-user-text-color: #5a5a5d;
     --ticket-footer-instance-badge-text: #4a90e2;
+    --ticket-footer-instance-badge-text-hover: #4a90e2;
+    --ticket-footer-instance-badge-text-selected: ghostwhite;
+    --ticket-footer-instance-badge-text-selected-weight: bold;
     --ticket-footer-instance-badge-border: 1px solid;
     --ticket-footer-instance-badge-border-color: #4a90e2;
-    --ticket-footer-instance-badge-border-radius: var(--border-radius);
+    --ticket-footer-instance-badge-border-radius: var(--badge-border-radius);
     --ticket-footer-instance-badge-background:ghostwhite;
+    --ticket-footer-instance-badge-background-selected: #6C757D;
     --ticket-footer-text-size: var(--badges-text-size);
-    --badge-category-text: ghostwhite;
-    --badge-category-text-size: var(--ticket-footer-text-size);
-    --badge-category-border: none;
-    --badge-category-border-color: ghostwhite;
-    --badge-category-background: #4a90e2;
-    --badge-category-border-radius: var(--border-radius);
-    --badge-checkbox-text-size: var(--badge-category-text-size);
+    --ticket-footer-category-badge-text: ghostwhite;
+    --ticket-footer-category-badge-text-size: var(--ticket-footer-text-size);
+    --ticket-footer-category-badge-text-selected: ghostwhite;
+    --ticket-footer-category-badge-text-selected-weight: bold;
+    --ticket-footer-category-badge-border: 1px solid;
+    --ticket-footer-category-badge-border-color: var(--ticket-card-background);
+    --ticket-footer-category-badge-background: #4a90e2;
+    --ticket-footer-category-badge-background-selected: #6C757D;
+    --ticket-footer-category-badge-border-radius: var(--badge-border-radius);
+    --badge-checkbox-text-size: var(--ticket-footer-category-badge-text-size);
     --badge-checkbox-selected-text-color: ghostwhite;
     --badge-checkbox-selected-border: 1px solid;
-    --badge-checkbox-selected-border-radius: var(--border-radius);
+    --badge-checkbox-selected-border-radius: var(--badge-border-radius);
     --badge-checkbox-selected-border-color: #6C757D;
     --badge-checkbox-selected-background-color: #6C757D;
     --badge-checkbox-unselected-text-color: #6C757D;
     --badge-checkbox-unselected-border: 1px solid;
     --badge-checkbox-unselected-border-color: #6C757D;
-    --badge-checkbox-unselected-border-radius: var(--border-radius);
+    --badge-checkbox-unselected-border-radius: var(--badge-border-radius);
     --badge-checkbox-unselected-background-color: ghostwhite;
     --ticket-card-border-color: #4a90e2;
     --ticket-card-background: #fff;
     --ticket-card-border-radius: var(--border-radius);
     --ticket-card-box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    --ticket-card-header-user-text: #000;
+    --ticket-card-header-user-text-selected: #4a90e2;
+    --ticket-card-header-user-text-hover: var(--link-hover-color);
+    --ticket-card-header-user-text-hover-decoration: underline;
+    --ticket-card-header-date-text: #000;
+    --ticket-card-header-date-text-selected: #4a90e2;
+    --ticket-card-header-date-text-hover: var(--link-hover-color);
+    --ticket-card-header-date-text-hover-decoration: underline;
     --scrollbar-thumb: #4a90e2;
     overflow-y: scroll;
 }
@@ -73,6 +93,8 @@
   --text-color: #FFFFFF;
   --answer-text-color: #50fa7b;
   --answer-text-weight: bold;
+  --answer-no-answer-text-color: #50fa7b;
+  --answer-no-answer-text-hover-color: ghostwhite;
   --question-text-color: #f8f8f2;
   --link-color: #f1fa8c;
   --link-visited-color: #f1fa8c;
@@ -88,31 +110,37 @@
   --dropdown-text-color: #bd93f9;
   --ticket-header-user-text-color: #bd93f9;
   --ticket-footer-instance-badge-text: #bd93f9;
+  --ticket-footer-instance-badge-text-hover: ghostwhite;
+  --ticket-footer-instance-badge-text-selected: ghostwhite;
+  --ticket-footer-instance-badge-text-selected-weight: bold;
   --ticket-footer-instance-badge-border: 1px solid;
+  --ticket-footer-instance-badge-border-selected: ghostwhite;
   --ticket-footer-instance-badge-border-color: #bd93f9;
-  --ticket-footer-instance-badge-border-radius: var(--border-radius);
   --ticket-footer-instance-badge-background: #44475a;
-  --badge-category-text: #ffb86c;
-  --badge-category-border: none;
-  --badge-category-border-color: none;
-  --badge-category-background: #44475a;
-  --badge-category-border-radius: var(--border-radius);
+  --ticket-footer-instance-badge-background-selected: #44475a;
+  --ticket-footer-category-badge-text: #ffb86c;
+  --ticket-footer-category-badge-text-selected: ghostwhite;
+  --ticket-footer-category-badge-background: #44475a;
+  --ticket-footer-category-badge-background-selected: #44475a;
   --badge-checkbox-selected-text-color: ghostwhite;
   --badge-checkbox-selected-border: 1px solid;
-  --badge-checkbox-selected-border-radius: var(--border-radius);
   --badge-checkbox-selected-border-color: #1c1e2b;
   --badge-checkbox-selected-background-color: #6C757D;
   --badge-checkbox-unselected-text-color: #6C757D;
   --badge-checkbox-unselected-border: 1px solid;
   --badge-checkbox-unselected-border-color: #6C757D;
-  --badge-checkbox-unselected-border-radius: var(--border-radius);
   --badge-checkbox-unselected-background-color: #1c1e2b;
   --ticket-card-border-color: #bd93f9;
   --ticket-card-background: #282a36;
-  --ticket-card-border-radius: var(--border-radius);
   --ticket-card-box-shadow: none;
+  --ticket-card-header-user-text: #bd93f9;
+  --ticket-card-header-user-text-selected: #fff;
+  --ticket-card-header-user-text-hover: #fff;
+  --ticket-card-header-date-text: #bd93f9;
+  --ticket-card-header-date-text-selected: ghostwhite;
+  --ticket-card-header-date-text-hover: ghostwhite;
   --scrollbar-thumb: #bd93f9;
-  overflow-y: scroll;  
+  overflow-y: scroll;
 }
 
 /* Using the important tag to overcome Dark Reader effects  */
@@ -139,15 +167,15 @@ html, body {
   padding-top: 48px;
   order: -1;
   width: 100%;
-  max-width: 300px;
+  max-width: 330px;
   height: 100vh;
 }
 
 .center-panel {
   background-color: var(--background-color-center-panel);
-  padding-top: 44px;
+  padding-top: 68px;
   height: 100%;
-  margin-left: 372px;
+  margin-left: 402px;
   margin-right: 24px;
 }
 
@@ -159,7 +187,7 @@ label {
   color: var(--forms-placeholder-text-color);
   font-size: var(--label-size);
   margin-left: 2px;
-  margin-bottom: 1px;
+  margin-bottom: var(--label-margin-bottom);
 }
 
 a {
@@ -182,126 +210,18 @@ a:active {
 
 .user-login-bar {
   position: absolute;
-  top: calc(1.5%);
+  top: calc(0.6%);
   left: calc(90%);
   cursor: pointer;
+  font-size: 1.5rem;
 }
 
-/* Container for the filters */
-.filters-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-/* Container to wrap category + user dropdowns */
+/* Container to wrap forms & dropdowns */
 .dropdowns-container {
-  display: block;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  gap:4px;
+  margin-top: 16px;
 }
 
-/* Category dropdown  */
-.category-dropdown {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-/* User dropdown  */
-.user-dropdown {
-  margin-top: 5px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-/* Container for the checkboxes */
-.checkboxes-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 24px;
-  margin-bottom: 8px;
-  gap: 4px;
-}
-
-.checkboxes-container-header {
-  color: var(--forms-placeholder-text-color);
-  font-size: var(--label-size);
-}
-
-/* formerly-checkbox badges  */
-.checkbox-badges {
-  display: inline-flex;
-  padding: 0px 4px 1px 4px;
-  margin-top: 0px;
-  margin-right: -3px;
-  margin-bottom: 0px;
-  font-family: var(--font-family);
-  color: var(--badge-checkbox-selected-text-color);
-  border: var(--badge-checkbox-selected-border);
-  border-color: var(--badge-checkbox-selected-border-color);
-  background-color: var(--badge-checkbox-selected-background-color);
-  border-radius: var(--badge-checkbox-selected-border-radius);
-}
-
-.checkbox-badges-unchecked {
-  display: inline-flex;
-  padding: 0px 4px 1px 4px;
-  margin-top: 0px;
-  margin-right: -3px;
-  margin-bottom: 0px;
-  color: var(--badge-checkbox-unselected-text-color);
-  border: var(--badge-checkbox-unselected-border);
-  border-color: var(--badge-checkbox-unselected-border-color);
-  background-color: var(--badge-checkbox-unselected-background-color);
-  border-radius: var(--badge-checkbox-unselected-border-radius);
-}
-
-.checkboxes-options {
-  font-size: var(--badge-checkbox-text-size);
-}
-
-.api-refresh {
-  display: flex;
-  color: var(--answer-text-color);
-  background-color: var(--background-color-left-panel);
-  border: none;
-  cursor: pointer;
-}
-
-.left-panel-refresh-data {
-  color: var(--text-color);
-  border: 1px dashed;
-  background-color: var(--background-color-left-panel);
-  border-color: var(--border-color-left-panel);
-  text-align: center;
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 24px;
-  font-family: var(--font-family);
-  font-size: 1.2rem;
-  width: 100%;
-  box-shadow: var(--ticket-card-box-shadow);
-}
-
-.search-results {
-  margin-top: 25px;
-}
-
-/* Search input container to put darkmode toggle inside  */
-.search-input-container {
-  display: inline-block;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  margin-bottom: 5px;
-}
-
-/* Text input styles */
+/* Search form */
 .search-input {
   color: var(--forms-text-color);
   background-color: var(--forms-background-color);
@@ -311,6 +231,7 @@ a:active {
   text-align: left;
   outline: none;
   width: 100%;
+  margin-top: var(--label-margin-bottom);
   padding: 4px 4px 4px 9px;
   border: 1px solid var(--forms-border-color);
   border-radius: var(--forms-border-radius);
@@ -325,20 +246,94 @@ a:active {
     color: var(--forms-placeholder-text-color);
 }
 
+/* Category dropdown  */
+.category-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: var(--forms-margin-top);
+}
+
+/* User dropdown  */
+.user-dropdown {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: var(--forms-margin-top);
+}
+
+/* Container for the checkboxes */
+.checkboxes-container {
+  display: block;
+  width: 100%;
+  padding-top: var(--label-margin-bottom);
+  margin-top: var(--forms-margin-top);
+}
+
+/* formerly-checkbox badges  */
+.checkbox-badges {
+  padding: 0px 6px 2px 6px;
+  margin-top: 0px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  color: var(--badge-checkbox-selected-text-color);
+  border: var(--badge-checkbox-selected-border);
+  border-color: var(--badge-checkbox-selected-border-color);
+  background-color: var(--badge-checkbox-selected-background-color);
+  border-radius: var(--badge-checkbox-selected-border-radius);
+  cursor: pointer;
+}
+
+.checkbox-badges-unchecked {
+  padding: 0px 5px 2px 5px;
+  margin-top: 0px;
+  margin-right: -3px;
+  margin-bottom: 0px;
+  color: var(--badge-checkbox-unselected-text-color);
+  border: var(--badge-checkbox-unselected-border);
+  border-color: var(--badge-checkbox-unselected-border-color);
+  background-color: var(--badge-checkbox-unselected-background-color);
+  border-radius: var(--badge-checkbox-unselected-border-radius);
+  cursor: pointer;
+}
+
+.checkboxes-options {
+  display: flex;
+  justify-content: center;
+  font-size: var(--badge-checkbox-text-size);
+  margin-top: var(--forms-margin-top);
+  gap: 10px;
+}
+
+.api-refresh-container {
+  display: flex;
+  justify-content: center;
+  font-size: var(--badge-checkbox-text-size);
+  margin-top: 24px;
+}
+
+.api-refresh-button {
+  display: flex;
+  color: var(--answer-text-color);
+  background-color: var(--background-color-left-panel);
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  padding-top: 4px;
+  padding-bottom: 0px;
+}
+
+.search-results {
+  margin-top: 25px;
+}
+
 .search-input:focus,
 .search-input:active,
 .dropdown:focus,
 .dropdown:active {
   outline: none;
   border-color: var(--forms-border-focus-color);
-}
-
-.search-input:not(:focus-visible),
-
-/* Checkbox styles: affects search and dropdown too */
-input[type="checkbox"] {
-/*  margin-right: 8px;*/
-  vertical-align: middle;
 }
 
 /* Dropdown styles */
@@ -375,6 +370,7 @@ input[type="checkbox"] {
 .datepicker-field {
   position: relative;
   width: 100%;
+  margin-top: var(--forms-margin-top);
 }
 
 .datepicker-input {
@@ -387,7 +383,8 @@ input[type="checkbox"] {
   padding: 4px 8px;
   border: 1px solid var(--forms-border-color);
   border-radius: var(--forms-border-radius);
-  margin-bottom: 3px;
+  margin-top: var(--label-margin-bottom);
+  margin-bottom: 4px;
   box-sizing: border-box;
   box-shadow: var(--ticket-card-box-shadow);
 }
@@ -401,13 +398,14 @@ input[type="checkbox"] {
 .datepicker-icon {
   position: absolute;
   right: 8px;
-  top: calc(50% + 9.5px);
+  top: calc(67%);
   transform: translateY(-50%);
   background-color: transparent;
+  font-size: 1.2rem;
   border: none;
   cursor: pointer;
   padding: 0;
-  color: #6C757D;
+  color: var(--forms-placeholder-text-color);
 }
 .datepicker-icon:focus {
   outline: none;
@@ -415,14 +413,15 @@ input[type="checkbox"] {
 
 .datepicker-reset {
   position: absolute;
-  right: 24px;
-  top: calc(50% + 10px);
+  right: 33px;
+  top: calc(68% + 0.3px);
   transform: translateY(-50%);
   background-color: transparent;
+  font-size: 1.2rem;
   border: none;
   cursor: pointer;
   padding: 0;
-  color: #6C757D;
+  color: var(--forms-placeholder-text-color);
 }
 
 /* Dark Mode Toggle */
@@ -445,7 +444,7 @@ body:not(.dark-mode) .fa-sun {
 }
 
 .dark-mode-toggle i {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   transition: transform 0.3s ease;
 }
 
@@ -478,34 +477,82 @@ body:not(.dark-mode) .fa-sun {
   margin-bottom: 10px;
 }
 
+.answer-no-answer {
+  color: var(--answer-no-answer-text-color);
+  cursor: pointer;
+}
+
+.answer-no-answer:hover {
+  color: var(--answer-no-answer-text-hover-color);
+  text-decoration: underline;
+}
+
 /* wraps every ticket */
 .ticket-card {
   border: 1px solid var(--ticket-card-border-color);
   border-radius: var(--ticket-card-border-radius);
-  padding-top: 14px;
-  padding-bottom: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-bottom: 15px;
+  padding: 24px;
+  margin-bottom: 24px;
   background-color: var(--ticket-card-background);
   box-shadow: var(--ticket-card-box-shadow);
 }
 
-/* wraps header to get id in the corner */
-.ticket-header {
+/* Header to wrap and position user, date, ticket ID */
+.ticket-card-header {
   font-size: var(--ticket-header-text-size);
   color: var(--ticket-header-user-text-color);
   display: flex;
   justify-content: space-between;
-  padding-bottom: 20px;
+  padding-bottom: 24px;
+  gap: 8px;
 }
 
-.ticket-id {
+/* User in the ticket header  */
+.ticket-card-header-user {
+  color: var(--ticket-card-header-user-text);
+  cursor: pointer;
+}
+
+.ticket-card-header-user:hover {
+  color: var(--ticket-card-header-user-text-hover);
+  text-decoration: var(--ticket-card-header-user-text-hover-decoration);
+}
+
+.ticket-card-header-user-selected {
+  color: var(--ticket-card-header-user-text-selected);
+  cursor: pointer;
+}
+
+.ticket-card-header-user-selected:hover {
+  color: var(--ticket-card-header-user-text-selected);
+  text-decoration: var(--ticket-card-header-user-text-hover-decoration);
+  cursor: pointer;
+}
+
+/* Date in the ticket header */
+.ticket-card-header-date {
+  color: var(--ticket-card-header-date-text);
+  cursor: pointer;
+}
+
+.ticket-card-header-date-selected {
+  color: var(--ticket-card-header-date-text-selected);
+  cursor: pointer;
+}
+
+.ticket-card-header-date-selected:hover {
+  color: var(--ticket-card-header-date-text-hover);
+  text-decoration: var(--ticket-card-header-date-text-hover-decoration);
+}
+
+.ticket-card-header-date:hover {
+  color: var(--ticket-card-header-date-text-hover);
+  text-decoration: var(--ticket-card-header-date-text-hover-decoration);
+}
+
+/* Ticket ID in the ticket header */
+.ticket-card-header-ticket-id {
   margin-left: auto;
-}
-
-.ticket-details {
-    display: block;
 }
 
 /* wraps footer for the category badges */
@@ -513,33 +560,58 @@ body:not(.dark-mode) .fa-sun {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  gap: 6px;
 }
 
 /* category badges in the ticket footer  */
 .ticket-footer-category-badge {
   display: inline-flex;
-  padding: 0.5px 5.5px 1.5px 5.5px;
+  padding: 0.5px 8.5px 3px 8.5px;
   margin-top: 8px;
-  margin-left: -1px;
-  margin-right: -3px;
+  margin-left: 0px;
+  margin-right: 0px;
   margin-bottom: 0px;
-  font-size: var(--badge-category-text-size);
+  font-size: var(--ticket-footer-category-badge-text-size);
   font-family: var(--font-family);
-  color: var(--badge-category-text);
-  border: var(--badge-category-border);
-  border-color: var(--badge-category-border-color);
-  background-color: var(--badge-category-background);
-  border-radius: var(--badge-category-border-radius);
+  color: var(--ticket-footer-category-badge-text);
+  border: var(--ticket-footer-category-badge-border);
+  border-color: var(--ticket-footer-category-badge-border-color);
+  background-color: var(--ticket-footer-category-badge-background);
+  border-radius: var(--ticket-footer-category-badge-border-radius);
   vertical-align: middle;
+  cursor: pointer;
+}
+
+/* Ticket footer category badges when toggled  */
+.ticket-footer-category-badge-selected {
+  display: inline-flex;
+  padding: 0.5px 8.5px 3px 8.5px;
+  margin-top: 8px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  font-size: var(--ticket-footer-category-badge-text-size);
+  font-family: var(--font-family);
+  font-weight: var(--ticket-footer-category-badge-text-selected-weight);
+  color: var(--ticket-footer-category-badge-text-selected);
+  border: 1px solid;
+  border-color: var(--ticket-footer-instance-badge-border-selected);
+  background-color: var(--ticket-footer-category-badge-background-selected);
+  border-radius: var(--ticket-footer-category-badge-border-radius);
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.ticket-footer-category-badge:hover {
+  color: ghostwhite;
 }
 
 /* instance badge in the ticket footer  */
 .ticket-footer-instance-badge {
   display: inline-block;
-  padding: 0px 5px 1px 5px;
-  margin-top: 8px;
-  margin-right: -1px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 1px;  margin-top: 8px;
+  margin-right: -2px;
   margin-bottom: 0px;
   font-size: var(--ticket-footer-text-size);
   font-family: var(--font-family);
@@ -549,6 +621,32 @@ body:not(.dark-mode) .fa-sun {
   background-color: var(--ticket-footer-instance-badge-background);
   border-radius: var(--ticket-footer-instance-badge-border-radius);
   vertical-align: middle; 
+  cursor: pointer;
+}
+
+/* instance badge in the ticket footer while selected  */
+.ticket-footer-instance-badge-selected {
+  display: inline-block;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 1px;
+  margin-top: 8px;
+  margin-right: -2px;
+  margin-bottom: 0px;
+  font-size: var(--ticket-footer-text-size);
+  font-weight: var(--ticket-footer-instance-badge-text-selected-weight);
+  font-family: var(--font-family);
+  color: var(--ticket-footer-instance-badge-text-selected);
+  border: var(--ticket-footer-instance-badge-border);
+  border-color: var(--ticket-footer-instance-badge-border-selected);
+  background-color: var(--ticket-footer-instance-badge-background-selected);
+  border-radius: var(--ticket-footer-instance-badge-border-radius);
+  vertical-align: middle; 
+  cursor: pointer;
+}
+
+.ticket-footer-instance-badge:hover {
+  color: var(--ticket-footer-instance-badge-text-hover);
 }
 
 ::-webkit-scrollbar {

@@ -171,6 +171,7 @@ class QuestionSearch extends Component
                 $this->filteredQuestions = $filtered;
             }
 
+            // Filters results by instance
             $instanceFilter = $this->instanceFilter;
             if ($instanceFilter) {
                 $filtered = $filtered->filter(function ($item) use ($instanceFilter) {
