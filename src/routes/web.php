@@ -63,7 +63,7 @@ Route::get('/auth/goog', function () {
         $googleTokenCookie = cookie('google_token', $googleToken, $user->expiresIn);
         $googleRefreshCookie = cookie('google_refresh', $googleRefresh, 525600);
 
-        // Show the site
+        // Show site
         return redirect('/')->withCookie($jwtTokenCookie)->withCookie($googleTokenCookie)->withCookie($go>
 
     } else {
