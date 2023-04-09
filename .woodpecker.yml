@@ -10,6 +10,11 @@ pipeline:
             from_secret: quayuser
           password:
             from_secret: quaypass
+        - registry: docker.io
+          username:
+            from_secret: dockerhubuser
+          password:
+            from_secret: dockerhubpass
 
     # settings:
     #   repo: quay.io/gomarcd/supman
