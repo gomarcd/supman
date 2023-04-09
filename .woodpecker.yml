@@ -2,7 +2,7 @@ pipeline:
   build-Dockerfile:
     image: plugins/docker
     commands:
-      - docker build --no-cache -t gomarcd/supman .
+      - docker build -t gomarcd/supman .
   push-DockerHub:
     image: plugins/docker
     settings:
