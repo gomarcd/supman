@@ -1,14 +1,18 @@
 pipeline:
   build-Dockerfile:
     image: woodpeckerci/plugin-docker-buildx
-    commands:
-      - docker build -t gomarcd/supman .
-  push-DockerHub:
-    image: woodpeckerci/plugin-docker-buildx
     settings:
-      repo: gomarcd/supman
-      username:
-        from_secret: ${DockerHubUser}
-      password:
-        from_secret: ${DockerHubPass}
+      repo: git.gomarcd.dev/gomarcd/supman
+      registry: docker.io
       tags: latest
+ #   commands:
+ #     - docker build -t gomarcd/supman .
+ # push-DockerHub:
+ #   image: woodpeckerci/plugin-docker-buildx
+ #   settings:
+ #     repo: gomarcd/supman
+ #     username:
+ #       from_secret: ${DockerHubUser}
+ #     password:
+ #       from_secret: ${DockerHubPass}
+ #     tags: latest
