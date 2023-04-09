@@ -6,7 +6,6 @@ pipeline:
       tag: latest
       logins:
         - registry: docker.io
-          username:
-            from_secret: dockerhubuser
+          username: gomarcd
           password:
             from_secret: dockerhubpass
