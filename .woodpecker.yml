@@ -10,8 +10,3 @@ pipeline:
             from_secret: DockerHubUser
           password:
             from_secret: DockerHubPass
-        - registry: quay.io
-          username:
-            from_secret: QuayUser
-          password:
-            from_secret: QuayPass
