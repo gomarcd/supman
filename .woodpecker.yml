@@ -2,8 +2,7 @@ pipeline:
   dockerBuild:
     image: woodpeckerci/plugin-docker-buildx
     settings:
-      repo: git.gomarcd.dev/gomarcd/supman
-      registry: quay.io
+      repo: quay.io/gomarcd/supman
       tag: latest
       username:
         from_secret: quayuser
