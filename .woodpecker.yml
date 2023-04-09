@@ -2,7 +2,7 @@ pipeline:
   build-and-push-image:
     image: woodpeckerci/plugin-docker-buildx
     settings:
-      repo: gomarcd/supman
+      repo: quay.io/gomarcd/supman,gomarcd/supman
       tag: latest
       logins:
         - registry: quay.io
@@ -15,12 +15,3 @@ pipeline:
             from_secret: dockeruser
           password:
             from_secret: dockerpass
-
-    # settings:
-    #   repo: quay.io/gomarcd/supman
-    #   registry: quay.io
-    #   tag: latest
-    #   username:
-    #     from_secret: quayuser
-    #   password:
-    #     from_secret: quaypass
