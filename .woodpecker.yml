@@ -11,4 +11,3 @@ pipeline:
         from_secret: ${DockerHubUser}
       password:
         from_secret: ${DockerHubPass}
-      tags: latest
