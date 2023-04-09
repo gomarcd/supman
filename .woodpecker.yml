@@ -15,3 +15,14 @@ pipeline:
             from_secret: dockeruser
           password:
             from_secret: dockerpass
+  deploy:
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: ssh_host
+      username:
+        from_secret: ssh_username
+      key:
+        from_secret: ssh_key
+      script:
+        - cd /home/md/docker/supman && docker compose pull && docker compose up -d --force-recreate --remove-orphans
