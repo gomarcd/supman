@@ -1,8 +1,9 @@
 pipeline:
-  dockerBuild:
+  build-and-push-image:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: quay.io/gomarcd/supman
+      registry: quay.io
       tag: latest
       username:
         from_secret: quayuser
