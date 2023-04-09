@@ -167,7 +167,7 @@ html, body {
   padding-top: 48px;
   order: -1;
   width: 100%;
-  max-width: 330px;
+  max-width: 350px;
   height: 100vh;
 }
 
@@ -175,7 +175,7 @@ html, body {
   background-color: var(--background-color-center-panel);
   padding-top: 68px;
   height: 100%;
-  margin-left: 402px;
+  margin-left: 422px;
   margin-right: 24px;
 }
 
@@ -286,7 +286,7 @@ a:active {
 }
 
 .checkbox-badges-unchecked {
-  padding: 0px 5px 2px 5px;
+  padding: 0px 6px 2px 6px;
   margin-top: 0px;
   margin-right: -3px;
   margin-bottom: 0px;
