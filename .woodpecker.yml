@@ -12,4 +12,4 @@ pipeline:
       password:
         from_secret: ${DockerHubPass}
       tags:
-        - latest
+        - gomarcd/supman:latest
