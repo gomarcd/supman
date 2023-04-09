@@ -3,9 +3,9 @@ pipeline:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: git.gomarcd.dev/gomarcd/supman
-      registry: docker.io
+      registry: quay.io
       tag: latest
       username:
-        from_secret: dockerhubuser
+        from_secret: quayuser
       password:
-        from_secret: dockerhubpass
+        from_secret: quaypass
