@@ -3,9 +3,9 @@ pipeline:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: git.gomarcd.dev/gomarcd/supman
+      registry: docker.io
       tag: latest
-      logins:
-        - registry: docker.io
-          username: gomarcd
-          password:
-            from_secret: dockerhubpass
+      username:
+        from_secret: dockerhubuser
+      password:
+        from_secret: dockerhubpass
