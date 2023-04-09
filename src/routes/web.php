@@ -64,7 +64,7 @@ Route::get('/auth/goog', function () {
         $googleRefreshCookie = cookie('google_refresh', $googleRefresh, 525600);
 
         // Show the site
-        return redirect('/')->withCookie($jwtTokenCookie)->withCookie($googleTokenCookie)->withCookie($go>
+        return redirect('/')->withCookie($jwtTokenCookie)->withCookie($googleTokenCookie)->withCookie($googleRefreshCookie);
 
     } else {
         return 'Denied.';
