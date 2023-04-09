@@ -74,22 +74,40 @@ Route::get('/auth/goog', function () {
 // Log user out
 Route::get('/logout', function () {
 
-    // Get the old token
-    $oldToken = Cookie::get('google_token');
+    // Revoke access token with oauth2 provider
+    if (Cookie::get('google_token')) {
+        $accessToken = Cookie::get('google_token');
+        $client = new Client();
+        $client->setClientId(env('G_CID'));
+        $client->setClientSecret(env('G_SEC'));
+        $client->revokeToken($accessToken);
 
-    // Get new token in case old one expired
-    $client = new Client();
-    $client->setClientId(env('G_CID'));
-    $client->setClientSecret(env('G_SEC'));
-    $client->refreshToken(Cookie::get('google_refresh'));
-    $newToken = $client->getAccessToken();
+        // Expire corresponding cookie
+        (Cookie::expire('google_token'));
 
-    // Now purge everything
-    (Cookie::expire('jwt_token'));
-    (Cookie::expire('google_token'));
-    $client->revokeToken($oldToken);
-    $client->revokeToken($newToken);
+        // Expire cookie with JWT token
+        if (Cookie::get('jwt_token')) {
+            (Cookie::expire('jwt_token'));
 
-    // Redirect back to login
-    return redirect('/auth/redirect');
+            // Send back to oauth2
+            return redirect('/auth/redirect');
+        }
+
+        // Send back to oauth2
+        return redirect('/auth/redirect');
+
+    } else {
+
+        // Expire cookie with JWT token
+        if (Cookie::get('jwt_token')) {
+            (Cookie::expire('jwt_token'));
+
+            // Send back to oauth2
+            return redirect('/auth/redirect');
+        }
+
+        // Send back to oauth2
+        return redirect('/auth/redirect');
+    }
+
 });
