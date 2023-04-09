@@ -11,5 +11,4 @@ pipeline:
         from_secret: ${DockerHubUser}
       password:
         from_secret: ${DockerHubPass}
-      tags:
-        - gomarcd/supman:latest
+      tags: latest
