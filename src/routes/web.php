@@ -29,60 +29,67 @@ if (App::environment('production')) {
     });
 }
 
-// Redirect the user to Google login
+// Log in with Google oauth2
 Route::get('/auth/redirect', function () {
-    return Socialite::driver('google')->redirect();
+    return Socialite::driver('google')
+        ->with(['access_type' => 'offline', 'prompt' => 'consent'])
+        ->redirect();
 });
 
 // User redirected here from Google after auth with them
 Route::get('/auth/goog', function () {
+
+    // Get whitelisted users
+    $whitelist = explode(',', env('AUTH_EMAIL'));
+
+    // Get logged in user
     $user = Socialite::driver('google')->user();
+
+    // Get Google Access Token
     $googleToken = $user->token;
+    $googleRefresh = $user->refreshToken;
 
-    // Check if the user in whitelist
-    $authorizedEmail = explode(',', env('AUTH_EMAIL'));
-
-    // Create JWT token for auth'd whitelisted user
-    if (in_array($user->email, $authorizedEmail)) {
+    // Give whitelisted users JWT token
+    if (in_array($user->email, $whitelist)) {
         $key = env('JWT_SECRET');
         $payload = array(
             "email" => $user->getEmail(),
             "firstName" => $user->user['given_name']
         );
-        $token = JWT::encode($payload, $key, 'HS256');
+        $jwtToken = JWT::encode($payload, $key, 'HS256');
 
-        // Store the JWT token in a cookie
-        $cookie = cookie('jwt_token', $token, 525600);
+        // Store tokens
+        $jwtTokenCookie = cookie('jwt_token', $jwtToken, 525600);
+        $googleTokenCookie = cookie('google_token', $googleToken, $user->expiresIn);
+        $googleRefreshCookie = cookie('google_refresh', $googleRefresh, 525600);
 
-        // Store the Google oauth2 token in a cookie
-        $googleTokenCookie = cookie('google_token', $googleToken, 525600);
+        // Show the site
+        return redirect('/')->withCookie($jwtTokenCookie)->withCookie($googleTokenCookie)->withCookie($go>
 
-        // Email is authorized, show site
-        return redirect('/')->withCookie($cookie)->withCookie($googleTokenCookie);
     } else {
-        // Email is not authorized, show error message
-        return 'Unauthorized';
+        return 'Denied.';
     }
 });
 
 // Log user out
 Route::get('/logout', function () {
 
-    // Get oauth2 access token
-    $googleToken = Cookie::get('google_token');
+    // Get the old token
+    $oldToken = Cookie::get('google_token');
 
-    if ($googleToken !== null && $googleToken !== '') {
+    // Get new token in case old one expired
+    $client = new Client();
+    $client->setClientId(env('G_CID'));
+    $client->setClientSecret(env('G_SEC'));
+    $client->refreshToken(Cookie::get('google_refresh'));
+    $newToken = $client->getAccessToken();
 
-        // Revoke their google oauth2 token from google
-        $googleClient = new Client();
-        $googleClient->setAccessToken($googleToken);
-        $googleClient->revokeToken();
+    // Now purge everything
+    (Cookie::expire('jwt_token'));
+    (Cookie::expire('google_token'));
+    $client->revokeToken($oldToken);
+    $client->revokeToken($newToken);
 
-        // Forget both the google oauth2 and JWT tokens and redirect to login
-        $cookie = Cookie::forget('jwt_token');
-        $googleToken = Cookie::forget('google_token');
-        return redirect('/auth/redirect')->withCookie($cookie)->withCookie($googleToken);
-    } else {
-        return redirect('/auth/redirect');
-    }
+    // Redirect back to login
+    return redirect('/auth/redirect');
 });
