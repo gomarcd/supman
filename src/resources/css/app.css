@@ -167,15 +167,15 @@ html, body {
   padding-top: 48px;
   order: -1;
   width: 100%;
-  max-width: 350px;
+  max-width: 375px;
   height: 100vh;
-}
+} 
 
 .center-panel {
   background-color: var(--background-color-center-panel);
   padding-top: 68px;
   height: 100%;
-  margin-left: 422px;
+  margin-left: 447px;
   margin-right: 24px;
 }
 
