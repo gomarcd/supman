@@ -6,7 +6,7 @@ RUN test -d storage/framework/views || mkdir -p storage/framework/views \
     && test -d storage/framework/sessions || mkdir -p storage/framework/sessions \
     && test -d storage/framework/cache || mkdir -p storage/framework/cache \
     && test -d storage/logs || mkdir -p storage/logs && touch storage/logs/laravel.log \
-    composer install
+    && composer install
 
 FROM node:latest AS node
 COPY --from=composer /var/www /var/www/
@@ -27,7 +27,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 RUN chmod 0644 /etc/crontabs/root \
     && chown -R www-data:www-data /var/www/public /var/www/storage /var/www/bootstrap/cache /var/lib/nginx \
-    && chmod -R 755 /var/www/bootstrap/cache /var/lib/nginx
+    && chmod -R 755 /var/www/vendor /var/www/storage /var/www/bootstrap/cache /var/lib/nginx
 
 WORKDIR /var/www
 RUN rm -rf /var/www/html && apk del build-base && apk add --update-cache && rm -rf /var/cache/apk/*
