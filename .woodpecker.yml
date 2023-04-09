@@ -5,8 +5,8 @@ pipeline:
       repo: git.gomarcd.dev/gomarcd/supman
       tag: latest
       logins:
-        - registry: https://index.docker.io/v1/
+        - registry: docker.io
           username:
-            from_secret: DockerHubUser
+            from_secret: dockerhubuser
           password:
-            from_secret: DockerHubPass
+            from_secret: dockerhubpass
