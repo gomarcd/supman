@@ -20,8 +20,6 @@ pipeline:
     settings:
       host:
         from_secret: ssh_host
-      username:
-        from_secret: ssh_username
       key:
         from_secret: ssh_key
       script:
