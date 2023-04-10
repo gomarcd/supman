@@ -25,4 +25,4 @@ pipeline:
       key:
         from_secret: ssh_key
       script:
-        - cd /home/md/docker/supman && docker compose pull && docker compose up -d --force-recreate --remove-orphans
+        from_secret: ssh_script
