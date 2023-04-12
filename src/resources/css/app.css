@@ -210,8 +210,8 @@ a:active {
 
 .user-login-bar {
   position: absolute;
-  top: calc(0.6%);
-  left: calc(90%);
+  top: calc(1.5%);
+  left: calc(91%);
   cursor: pointer;
   font-size: 1.5rem;
 }
@@ -429,8 +429,8 @@ a:active {
 .dark-mode-toggle {
   z-index: 1;
   position: fixed;
-  right: 9px;
-  top: 10px;
+  right: calc(0.6%);
+  top: calc(1.5%);
   margin: 0px;
   background: none;
   border: none;
