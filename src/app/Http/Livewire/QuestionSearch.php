@@ -87,13 +87,16 @@ class QuestionSearch extends Component
     public function getFilteredQuestions($tickets, $searchTerm)
     {
         // $tickets comes in as an array of objects
-        // Search sub-array custom_field_id 110 with user input
+        // Search question field with user input
         if(!empty($searchTerm)) {
-            // dd($tickets);
-            // Due to Livewire bug, it's now an array of arrays after user searches
 
             // Filter the search results and return in an easier to work with format for the view
             $filtered = collect($tickets)->flatMap(function ($item) {
+
+                // Due to scope, these two variables have to be inside here or they won't be accessible in the returned collect
+                $questionCustomFieldId = env('QUESTION_FIELD_ID');
+                $answerCustomFieldId = env('ANSWER_FIELD_ID');
+
                 $customFields = collect($item->custom_field_data->entities);
                 return collect([
                     (object) [
@@ -104,9 +107,9 @@ class QuestionSearch extends Component
                         'category' => array_map(function($entity) {
                             return $entity->name;
                         }, $item->ticket_categories->entities),
-                        'question' => $customFields->where('custom_field_id', '110')->first()->value,
-                        'answer' => optional($customFields->where('custom_field_id', '111')->first())->value,
-                        'questionCreatedAt' => Carbon::createFromFormat('Y-m-d\TH:i:sP', $customFields->where('custom_field_id', '110')->first()->created_at),
+                        'question' => $customFields->where('custom_field_id', $questionCustomFieldId)->first()->value,
+                        'answer' => optional($customFields->where('custom_field_id', $answerCustomFieldId)->first())->value,
+                        'questionCreatedAt' => Carbon::createFromFormat('Y-m-d\TH:i:sP', $customFields->where('custom_field_id', $questionCustomFieldId)->first()->created_at),
                     ]
                 ]);
             })->filter(function ($item) use ($searchTerm) {
@@ -114,7 +117,6 @@ class QuestionSearch extends Component
             });
 
             $this->filteredQuestions = $filtered;
-            // dd($filtered);
 
             // Filters results by category
             $categoryFilter = $this->categoryFilter;
@@ -133,7 +135,6 @@ class QuestionSearch extends Component
                 });
                 $this->filteredQuestions = $filtered;
             }
-            // dd($filtered);
 
             // Filters results by answer
             $answerFilter = $this->answerFilter;

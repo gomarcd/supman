@@ -8,13 +8,15 @@ class getTickets
 {
     public function withQuestions()
     {
+        $questionCustomFieldId = env('QUESTION_FIELD_ID');
+
         // Find how many records to pull
-        $findRecordCount = <<< 'GRAPHQL'
+        $findRecordCount = <<<GRAPHQL
         query findCount {
           tickets(
-          reverse_relation_filters: {relation:"custom_field_data", search: {exists: "value", integer_fields: {attribute: "custom_field_id", search_value:110, operator:EQ}}}) {
-            page_info {total_count}
-          }
+            reverse_relation_filters: {relation:"custom_field_data", search: {exists: "value", integer_fields: {attribute: "custom_field_id", search_value: $questionCustomFieldId, operator:EQ}}}) {
+              page_info {total_count}
+            }
         }
         GRAPHQL;
 
@@ -23,27 +25,35 @@ class getTickets
                 'query' => $findRecordCount
             ])['data']['tickets']['page_info']['total_count'];
 
-        // dd($recordCount);
-
         // Get all tickets that have something in the Question field
-        $query = <<< 'GRAPHQL'
-        query getTickets($paginator: Paginator) {
+        $query = <<<GRAPHQL
+        query getTickets(\$paginator: Paginator) {
           tickets(
-            paginator: $paginator
-            reverse_relation_filters: {relation:"custom_field_data", search: {exists: "value", integer_fields: {attribute: "custom_field_id", search_value:110, operator:EQ}}}
+            paginator: \$paginator
+            reverse_relation_filters: {
+              relation: "custom_field_data",
+              search: {
+                exists: "value",
+                integer_fields: {
+                  attribute: "custom_field_id",
+                  search_value: $questionCustomFieldId,
+                  operator: EQ
+                }
+              }
+            }
           ) {
             entities {
               id
               subject
               user {
-              	name
+                name
               }
               ticketable {
-              	__typename
-              	... on Account {
-              		id
+                __typename
+                ... on Account {
+                  id
                   name
-              	}
+                }
               }
               ticket_categories {
                 entities {
@@ -63,6 +73,7 @@ class getTickets
         }
         GRAPHQL;
 
+
 		// Variables for the query to pull all matching records
         $queryVariables = [
             "paginator" => [
@@ -79,9 +90,6 @@ class getTickets
 
         // Strip out unnecessary layers and put into array of objects
         $tickets = json_decode($response->getBody()->getContents())->data->tickets->entities;
-        // dd($tickets);
-        // Check contents of $tickets
-        // dd($tickets);
 
         // Get list of categories as array
         $ticketCategories = collect($tickets)->pluck('ticket_categories.entities.*.name')->flatten()->unique();
