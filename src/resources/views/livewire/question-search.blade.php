@@ -1,8 +1,9 @@
 <div wire:poll="refreshData" class="container">
     <!-- Dark mode toggle -->
     <button wire:ignore id="dark-mode-toggle" class="dark-mode-toggle">
-      <i class="fa fa-sun"></i>
-      <i class="fa fa-moon"></i>
+        <!-- <img class="fa-sun" src="/sun.svg" alt="Light mode"> -->
+        <i class="fa-solid fa-lightbulb"></i>
+        <i class="fa fa-moon"></i>
     </button>
     <!-- Left panel -->
     <div class="left-panel">
@@ -99,7 +100,7 @@
                 <i wire:target="newApiCall" class="fa-solid fa-arrows-rotate" wire:loading.class="fa-spin"></i>
             </button>
         </div>
-    
+
     </div>
 
     <!-- Center panel -->
