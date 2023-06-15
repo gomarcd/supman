@@ -14,7 +14,7 @@ WORKDIR /var/www
 
 RUN npm install && npm run build && rm -rf node_modules
 
-FROM php:8.2.4-fpm-alpine
+FROM php:8.2.7-fpm-alpine
 COPY --from=node /var/www /var/www
 
 RUN docker-php-ext-install pdo_mysql && apk add --no-cache autoconf build-base nginx dcron redis supervisor \
