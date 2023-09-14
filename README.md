@@ -1,6 +1,6 @@
 ##
 
-A simple webapp to call a GraphQL API and search for ticket questions.
+A simple webapp for Sonar to call GraphQL and search for ticket questions.
 
 Made with Laravel & Livewire:
 
