@@ -11,12 +11,12 @@ import.meta.glob([
 const storedDarkMode = localStorage.getItem("darkMode");
 
 // Different toggle icons for dark and light mode
-const sunIcon = document.querySelector("#dark-mode-toggle .fa-sun");
+const sunIcon = document.querySelector("#dark-mode-toggle .fa-lightbulb");
 const moonIcon = document.querySelector("#dark-mode-toggle .fa-moon");
 
 function setDarkMode(enabled) {
   const darkModeToggle = document.getElementById("dark-mode-toggle");
-  const sunIcon = darkModeToggle.querySelector(".fa-sun");
+  const sunIcon = darkModeToggle.querySelector(".fa-lightbulb");
   const moonIcon = darkModeToggle.querySelector(".fa-moon");
   if (enabled) {
     document.documentElement.classList.add("dark-mode");
