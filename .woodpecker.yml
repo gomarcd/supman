@@ -15,12 +15,12 @@ pipeline:
             from_secret: dockeruser
           password:
             from_secret: dockerpass
-  deploy:
-    image: appleboy/drone-ssh
-    settings:
-      host:
-        from_secret: ssh_host
-      key:
-        from_secret: ssh_key
-      script:
-        from_secret: ssh_script
+  # deploy:
+  #   image: appleboy/drone-ssh
+  #   settings:
+  #     host:
+  #       from_secret: ssh_host
+  #     key:
+  #       from_secret: ssh_key
+  #     script:
+  #       from_secret: ssh_script
